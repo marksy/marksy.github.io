@@ -1,0 +1,157 @@
+<html lang="en">
+    <head>
+        <title>hi</title>
+        <style>
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                font-family: monospace;
+            }
+            h1 {
+                font-size: 100px;
+                font-weight: 300;
+                text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            }
+            a {
+                color: #579CF5;
+            }
+
+            a:focus::before {
+                content: '🦆';
+            }
+
+            .links p { text-align: center}
+
+            .beer {
+                position: fixed;
+                bottom: 0;
+                background-color: rgb(5, 10, 6);
+                color: #8be202;
+                padding: 12px;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                text-align: center;
+            }
+
+            label {
+                display: flex;
+            }
+
+            button,
+            input {
+                margin: 0;
+                padding: 6px;
+                font-size: 12px;
+                color: #051224;
+                border: 1px solid #051224;
+                border-radius: 0;
+            }
+
+            button {
+                background: #fff;
+                border-radius: 0 3px 3px 0;
+            }
+
+            input {
+                border-right: 0;
+                border-radius: 3px 0 0 3px;
+            }
+
+            @media (prefers-color-scheme: dark) {
+                body,
+                html {
+                    color: rgba(255,255,255,0.7);
+                    background: #343435;
+                }
+
+                input,
+                button {
+                    color: rgba(255,255,255,0.7);
+                    border-color: #64676b;
+                    background: #3e3e3f;
+                }
+            }
+        </style>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8">
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    </head>
+    <body>
+        <h1 id="greeting">heljo</h1>
+        <form method="get" action="http://www.google.com/search?q=">
+            <label for="customSearch">
+                <input type="text" name="q" id="customSearch" placeholder="a 'somthing' search" autofocus="autofocus">
+                <button type="submit">🔎</button>
+            </label>
+            <input type="hidden" name="sitesearch" />
+        </form>
+        <div class="links">
+          <p>🗄 <a href="https://bawkbawkmarksy.us7.quickconnect.to">snoopy</a></p>
+            <p>🎥 <a href="https://unifi.ui.com/device/7483C21AFAEB0000000003FBCAB000000000042623BB000000005CBCBE9A:1379096399/protect/devices">unifi protect</a></p>
+            <p>🎛 <a href="https://unifi.ui.com/device/7483C21AFAEB0000000003FBCAB000000000042623BB000000005CBCBE9A:1379096399/network/site/default/dashboard">unifi controller</a></p>
+        </div>
+        <div id="beer" class="beer"></div>
+        <script>
+            const greeting = document.querySelector('#greeting');
+            const greetz = [
+                'kia ora',
+                'hëj',
+                'hāllo',
+                'hello',
+                'Здравейте',
+                'העלא',
+                'مرحبا',
+                'नमस्ते',
+                'こんにちは',
+                'heljo',
+                'wjat',
+                '🇳🇿',
+                '🎅',
+                '🍺',
+                '🏖',
+                '🤠',
+                '💩',
+                '🆒',
+                'sup dog',
+                'supé dogé',
+                '¿que pasa?',
+            ];
+            var randGr33tz = greetz[Math.floor(Math.random() * greetz.length)];
+            greeting.innerText = randGr33tz;
+            document.title = randGr33tz;
+
+
+            var runTimestamp = Math.round(Date.now());
+            function beerOclock(beerDay) {
+                var dayOfWeek = beerDay || 5;
+                var date = new Date(runTimestamp);
+                var msg;
+                var diff = date.getDay() - dayOfWeek;
+                var beer = document.getElementById('beer');
+                if (diff > 0) {
+                    date.setDate(date.getDate() + 6);
+                }
+                else if (diff < 0) {
+                    date.setDate(date.getDate() + ((-1) * diff));
+                }
+                date.setHours(16);
+                date.setMinutes(30);
+                date.setSeconds(0);
+
+                beer.innerHTML = `Beer o'clock ${moment(date).fromNow()} 🍺 <br>
+Last day at Spotlight is ${daysRemaining('2021-04-29')} 🚀`;
+                return false;
+            }
+
+            function daysRemaining(eventDate) {
+                return moment(eventDate).fromNow();
+            }
+
+            beerOclock();
+
+
+        </script>
+    </body>
+</html>

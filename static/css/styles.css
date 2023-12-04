@@ -1,0 +1,291 @@
+:root {
+    --main-bg-color: #eee6d6;
+    --main-fg-color: #58595e;
+    --transition-speed: 500ms;
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-bg-color: #253136;
+        --main-fg-color: #95afbd;
+    }
+}
+@media screen and (min-width: 300px) {
+    :root {
+        --main-bg-color: #eed6d6;
+        --main-fg-color: #5e5858;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #253136;
+            --main-fg-color: #95afbd;
+        }
+    }
+}
+@media screen and (min-width: 400px) {
+    :root {
+        --main-bg-color: #eedcd6;
+        --main-fg-color: #5e5a58;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #362b25;
+            --main-fg-color: #bda195;
+        }
+    }
+}
+@media screen and (min-width: 500px) {
+    :root {
+        --main-bg-color: #eee4d6;
+        --main-fg-color: #5e5b58;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #362e25;
+            --main-fg-color: #bda795;
+        }
+    }
+}
+@media screen and (min-width: 600px) {
+    :root {
+        --main-bg-color: #eee7d6;
+        --main-fg-color: #5e5c58;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #363025;
+            --main-fg-color: #bdad95;
+        }
+    }
+}
+@media screen and (min-width: 700px) {
+    :root {
+        --main-bg-color: #eeecd6;
+        --main-fg-color: #5e5d58;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #363325;
+            --main-fg-color: #bdb295;
+        }
+    }
+}
+@media screen and (min-width: 800px) {
+    :root {
+        --main-bg-color: #eaeed6;
+        --main-fg-color: #5d5e58;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #343625;
+            --main-fg-color: #babd95;
+        }
+    }
+}
+@media screen and (min-width: 900px) {
+    :root {
+        --main-bg-color: #e3eed6;
+        --main-fg-color: #5b5e58;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #2e3625;
+            --main-fg-color: #abbd95;
+        }
+    }
+}
+@media screen and (min-width: 1000px) {
+    :root {
+        --main-bg-color: #dbeed6;
+        --main-fg-color: #595e58;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #293625;
+            --main-fg-color: #9fbd95;
+        }
+    }
+}
+@media screen and (min-width: 1100px) {
+    :root {
+        --main-bg-color: #dbeed6;
+        --main-fg-color: #595e58;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #293625;
+            --main-fg-color: #9fbd95;
+        }
+    }
+}
+@media screen and (min-width: 1200px) {
+    :root {
+        --main-bg-color: #d6eede;
+        --main-fg-color: #585e5c;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #25362e;
+            --main-fg-color: #95bda2;
+        }
+    }
+}
+@media screen and (min-width: 1300px) {
+    :root {
+        --main-bg-color: #d6eee6;
+        --main-fg-color: #585e5d;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #253631;
+            --main-fg-color: #95bdb1;
+        }
+    }
+}
+@media screen and (min-width: 1400px) {
+    :root {
+        --main-bg-color: #d6eeeb;
+        --main-fg-color: #585e5e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #253634;
+            --main-fg-color: #95bdb7;
+        }
+    }
+}
+@media screen and (min-width: 1500px) {
+    :root {
+        --main-bg-color: #d6e7ee;
+        --main-fg-color: #585d5e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #253436;
+            --main-fg-color: #95b7bd;
+        }
+    }
+}
+@media screen and (min-width: 1600px) {
+    :root {
+        --main-bg-color: #d6e1ee;
+        --main-fg-color: #585b5e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #252e36;
+            --main-fg-color: #95abbd;
+        }
+    }
+}
+@media screen and (min-width: 1700px) {
+    :root {
+        --main-bg-color: #d6dbee;
+        --main-fg-color: #585a5e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #252a36;
+            --main-fg-color: #95a2bd;
+        }
+    }
+}
+@media screen and (min-width: 1800px) {
+    :root {
+        --main-bg-color: #d8d6ee;
+        --main-fg-color: #58585e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #252636;
+            --main-fg-color: #9596bd;
+        }
+    }
+}
+@media screen and (min-width: 1900px) {
+    :root {
+        --main-bg-color: #e2d6ee;
+        --main-fg-color: #5c585e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #2e2536;
+            --main-fg-color: #a895bd;
+        }
+    }
+}
+@media screen and (min-width: 2000px) {
+    :root {
+        --main-bg-color: #eed6ed;
+        --main-fg-color: #5e585e;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #352536;
+            --main-fg-color: #b995bd;
+        }
+    }
+}
+@media screen and (min-width: 2100px) {
+    :root {
+        --main-bg-color: #eed6e2;
+        --main-fg-color: #5e585c;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --main-bg-color: #362531;
+            --main-fg-color: #bd95b2;
+        }
+    }
+}
+body {
+    background-color: var(--main-bg-color);
+    color: var(--main-fg-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-weight: 400;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+p {
+    font-size: 1rem;
+}
+h1, p {
+    font-family: monospace;
+}
+a, a:any-link, a:hover {
+    color: var(--main-fg-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--main-fg-color);
+    transition: border-bottom-color 222ms;
+}
+a:hover {
+    border-color: transparent;
+}
+.wrapper {
+    padding: 2rem;
+}
+span.email b {
+    display: none;
+}

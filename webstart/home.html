@@ -612,6 +612,8 @@
             addCalendarWrapperAdd.addEventListener('click', () => {
                 const marksyEvents = JSON.parse(localStorage.getItem('marksyEvents')) || [];
 
+                newCalendarEventName.focus();
+
                 if (!newCalendarEventName.value) {
                     newCalendarEventName.classList.add('form-error');
                 }

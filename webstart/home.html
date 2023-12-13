@@ -592,6 +592,7 @@
                 addCalendarButton.classList.add('hide');
                 addCalendarWrapper.classList.add('show');
                 editCalendarEventsButton.classList.add('hide');
+                newCalendarEventName.focus();
             });
 
             addCalendarWrapperCancel.addEventListener('click', () => {
@@ -611,8 +612,6 @@
 
             addCalendarWrapperAdd.addEventListener('click', () => {
                 const marksyEvents = JSON.parse(localStorage.getItem('marksyEvents')) || [];
-
-                newCalendarEventName.focus();
 
                 if (!newCalendarEventName.value) {
                     newCalendarEventName.classList.add('form-error');

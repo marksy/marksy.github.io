@@ -329,7 +329,7 @@
                 <button type="button" class="dialog-cancel">Cancel</button>
             </footer>
         </dialog>
-        <div class="add-calendar-event-wrapper">
+        <form id="calendar-form" class="add-calendar-event-wrapper">
             <label>
                 <span>Event name</span>
                 <input type="text" id="new-calendar-event-name">
@@ -343,7 +343,7 @@
                 <input type="date" id="new-calendar-event-date">
             </label>
             <div class="button-group">
-                <button type="button" class="add-calendar-event-wrapper--add">Add</button>
+                <button type="submit" class="add-calendar-event-wrapper--add">Add</button>
                 <button type="button" class="add-calendar-event-wrapper--cancel">Cancel</button>
             </div>
         </div>
@@ -571,7 +571,7 @@
             const addCalendarButton = document.querySelector('.add-calendar-button');
             const addCalendarWrapper = document.querySelector('.add-calendar-event-wrapper');
             const addCalendarWrapperCancel = document.querySelector('.add-calendar-event-wrapper--cancel');
-            const addCalendarWrapperAdd = document.querySelector('.add-calendar-event-wrapper--add');
+            const calendarForm = document.querySelector('#calendar-form');
 
             const newCalendarEventName = document.querySelector('#new-calendar-event-name');
             const newCalendarEventEmoji = document.querySelector('#new-calendar-event-emoji');
@@ -610,7 +610,7 @@
 
             });
 
-            addCalendarWrapperAdd.addEventListener('click', () => {
+            calendarForm.addEventListener('submit', () => {
                 const marksyEvents = JSON.parse(localStorage.getItem('marksyEvents')) || [];
 
                 if (!newCalendarEventName.value) {

@@ -1,0 +1,291 @@
+:root {
+    --main-bg-color: #d6e7ee;
+    --main-fg-color: #585d5e;
+    --transition-speed: 500ms;
+    --amount: -200px;
+    --duration: 80s;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-bg-color: #253436;
+        --main-fg-color: #95b7bd;
+    }
+}
+
+@keyframes blinker {
+    0% {
+        opacity: 1;
+    }
+    49% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(var(--amount));
+    }
+}
+
+body {
+    background-color: var(--main-bg-color);
+    color: var(--main-fg-color);
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-weight: 400;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+p {
+    font-size: 1rem;
+}
+
+h1, p {
+    font-family: monospace;
+}
+a, a:hover {
+    color: var(--main-fg-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom-color 222ms;
+}
+
+a:hover {
+    border-color: var(--main-fg-color);
+}
+
+a:focus::after {
+    content: ' 🦆';
+}
+
+.page-wrapper {
+    padding: 2rem;
+    position: relative;
+    display: flex;
+}
+
+.strike-through {
+    text-decoration: line-through;
+}
+
+.dim {
+    opacity: 0.5;
+}
+
+.links a {
+    text-decoration: none;
+}
+
+label {
+    display: flex;
+}
+
+button,
+input {
+    margin: 0;
+    padding: 6px;
+    font-size: 12px;
+    color: #051224;
+    border: 1px solid #051224;
+    border-radius: 0;
+}
+
+button {
+    background: #fff;
+    border-radius: 0 3px 3px 0;
+}
+
+input {
+    border-right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.beer {
+    position: fixed;
+    bottom: 0;
+    background-color: rgb(36, 64, 75);
+    color: #8be202;
+    padding: 12px;
+    min-height: 30px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    transform: translateX(0);
+    transition: 4s ease-out;
+}
+
+.beer a {
+    color: #8be202;
+    text-decoration: underline;
+}
+
+.wrapper {
+    animation: scroll var(--duration) linear infinite;
+    white-space: nowrap;
+    will-change: transform;
+}
+
+.beer-wrapper {
+    background-color: rgb(36, 64, 75);
+    position: fixed;
+    bottom: 0;
+    height: 52px;
+    width: 100%;
+}
+
+/* .beer:hover {
+    transform: translateX(-6%);
+} */
+
+.beer:hover .wrapper {
+    animation-play-state: paused;
+}
+
+/* .wrapper ul {
+    border: 1px solid red;
+} */
+
+.beer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-height: 30px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.beer li {
+    font-family: monospace;
+    list-style: none;
+    padding: 0;
+    margin: 0 48px 0 0;
+    display: inline-block;
+    width: 400px;
+}
+
+.beer li.display-none {
+    display: none;
+}
+
+#date {
+    font-family: monospace;
+    font-size: 1.3vw;
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+    /*background-color: rgba(0,0,0,0.1);*/
+    /*border: 1px solid rgba(0,0,0,0.2);*/
+    /*padding: 0.3vw 0.7vw;*/
+    /*border-radius: 0.3vw;*/
+    color: #333;
+}
+
+#time {
+    color: #333;
+    font-family: monospace;
+    font-size: 3.5vw;
+    position: absolute;
+    top: 2.5vw;
+    right: 1vh;
+    /*background-color: rgba(0,0,0,0.1);*/
+    /*border: 1px solid rgba(0,0,0,0.2);*/
+    /*padding: 0 1vw;*/
+    /*border-radius: 0.5vw;*/
+}
+
+#time span {
+    animation: blinker 1s linear infinite;
+}
+
+@media (prefers-color-scheme: dark) {
+    body,
+    html {
+        color: rgba(255,255,255,0.7);
+        background: #343435;
+    }
+
+    input,
+    button {
+        color: rgba(255,255,255,0.7);
+        border-color: #64676b;
+        background: #3e3e3f;
+    }
+
+    #date,
+    #time {
+        color: rgba(255,255,255,0.7);
+        background-color: rgba(0,0,0,0.3);
+    }
+}
+
+.add-calendar {
+    font-family: monospace;
+}
+
+.add-calendar input,
+.add-calendar button {
+    border: unset;
+    border-radius: unset;
+}
+
+.add-calendar label {
+    flex-direction: column;
+    margin-top: 1rem;
+}
+
+.calendar-count {
+    position: absolute;
+    bottom: 5rem;
+    left: 2rem;
+}
+
+.add-calendar-button-group,
+.add-calendar-event-wrapper {
+    position: absolute;
+    bottom: 5rem;
+    right: 2rem;
+}
+.add-calendar-event-wrapper {
+    display: none;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: end;
+    margin-top: 1rem;
+}
+.button-group button {
+    margin-left: 0.5rem;
+}
+
+.add-calendar .form-error {
+    border: 1px solid red;
+}
+
+dialog h1 {
+    font-size: 1.25rem;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}

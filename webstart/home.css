@@ -243,9 +243,25 @@ input {
     border-radius: unset;
 }
 
+.add-calendar button.delete-event {
+    border: 1px solid rgba(255,0,0,0.4);
+    background-color: rgba(255,0,0,0.2);
+}
+
+.add-calendar button.delete-event:hover {
+    border: 1px solid rgba(255,0,0,0.6);
+    background-color: rgba(255,0,0,0.4);
+}
+
 .add-calendar label {
     flex-direction: column;
     margin-top: 1rem;
+}
+
+.dialog-events .dialog-event {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .calendar-count {
@@ -289,3 +305,4 @@ dialog h1 {
 .hide {
     display: none;
 }
+

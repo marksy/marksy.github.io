@@ -295,7 +295,7 @@
         dialogEvents = JSON.parse(localStorage.getItem('marksyEvents')) || [];
         let html = ``;
         dialogEvents.forEach((item, index) => {
-            html += `<div class="dialog-event">${item.title} - ${item.date} <button type="button" class="delete-event" data-index="${index}">delete</button></div>`;
+            html += `<div class="dialog-event"><span class="${moment(item.date).isBefore(new Date()) ? 'strike-through' : ''}">${item.title} - ${item.date}</span> <button type="button" class="delete-event" data-index="${index}">delete</button></div>`;
         });
 
         dialogEventsContainer.innerHTML = html;

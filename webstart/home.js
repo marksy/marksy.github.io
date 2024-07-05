@@ -120,9 +120,29 @@
         const sortedArray = calendarEvents.sort((a,b) => new moment(a.date).format('X') - new moment(b.date).format('X'))
         const list = sortedArray.map((calendarEvent) => {
                 const rightNow = new moment();
-                let html = `<li class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' :''}" title="${moment(calendarEvent.date).format('Do MMMM YYYY')}"><span class="${moment(calendarEvent.date) < rightNow ? 'strike-through dim' : ''}">${calendarEvent.title} ${daysRemaining(calendarEvent.date)}</span> <span class="${moment(calendarEvent.date) < rightNow ? 'dim' : ''}">${moment(calendarEvent.date) < rightNow ? '✅' : calendarEvent.emoji}</span></li>`;
+                let html = `<li 
+                class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' :''}" 
+                title="${moment(calendarEvent.date).format('Do MMMM YYYY')}">
+                    <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
+                        ${calendarEvent.title} ${daysRemaining(calendarEvent.date)}
+                    </span>
+                    <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'dim' : ''}">
+                        ${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? '✅' : calendarEvent.emoji}
+                    </span>
+                </li>`;
                 if (calendarEvent?.link) {
-                    html = `<li class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' :''}" title="${moment(calendarEvent.date).format('Do MMMM YYYY')}"><a href="${calendarEvent.link}" target="_blank"><span class="${moment(calendarEvent.date) < rightNow ? 'strike-through dim' : ''}">${calendarEvent.title} ${daysRemaining(calendarEvent.date)}</span> <span class="${moment(calendarEvent.date) < rightNow ? 'dim' : ''}">${moment(calendarEvent.date) < rightNow ? '✅' : calendarEvent.emoji}</span></a></li>`;
+                    html = `<li 
+                    class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' :''}" 
+                    title="${moment(calendarEvent.date).format('Do MMMM YYYY')}">
+                        <a href="${calendarEvent.link}" target="_blank">
+                            <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
+                                ${calendarEvent.title} ${daysRemaining(calendarEvent.date)}
+                            </span>
+                            <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'dim' : ''}">
+                                ${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? '✅' : calendarEvent.emoji}
+                            </span>
+                        </a>
+                    </li>`;
                 }
                 return html
             }).join('')

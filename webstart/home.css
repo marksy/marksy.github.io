@@ -96,6 +96,11 @@ a:focus::after {
     opacity: 0.5;
 }
 
+.links {
+    max-height: 60vh;
+    overflow: auto;
+}
+
 .links a {
     text-decoration: none;
 }

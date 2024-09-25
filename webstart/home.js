@@ -1,4 +1,4 @@
-((JSConfetti, moment) => {
+((JSConfetti, moment, _) => {
     const jsConfetti = new JSConfetti();
 
     function calcWidth() {
@@ -54,6 +54,7 @@
     let beerDate
 
     const runTimestamp = Math.round(Date.now());
+
     function beerOclock(beerDay) {
         const dayOfWeek = beerDay || 5;
         const date = new Date(runTimestamp);
@@ -62,8 +63,7 @@
         const beer = document.getElementById('beer');
         if (diff > 0) {
             date.setDate(date.getDate() + 6);
-        }
-        else if (diff < 0) {
+        } else if (diff < 0) {
             date.setDate(date.getDate() + ((-1) * diff));
         }
         date.setHours(16);
@@ -108,7 +108,8 @@
             addedDates.forEach((item) => {
                 calendarEvents.push(item);
             });
-        };
+        }
+        ;
 
         const numberOfCalendarEvents = calendarEvents.length;
         const cssRoot = document.querySelector(':root');
@@ -117,11 +118,11 @@
         const calendarCount = document.querySelector('.calendar-count');
         calendarCount.textContent = `${numberOfCalendarEvents} event${numberOfCalendarEvents > 1 ? 's' : ''}`
 
-        const sortedArray = calendarEvents.sort((a,b) => new moment(a.date).format('X') - new moment(b.date).format('X'))
+        const sortedArray = calendarEvents.sort((a, b) => new moment(a.date).format('X') - new moment(b.date).format('X'))
         const list = sortedArray.map((calendarEvent) => {
-                const rightNow = new moment();
-                let html = `<li 
-                class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' :''}" 
+            const rightNow = new moment();
+            let html = `<li 
+                class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' : ''}" 
                 title="${moment(calendarEvent.date).format('Do MMMM YYYY')}">
                     <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
                         ${calendarEvent.title} ${daysRemaining(calendarEvent.date)}
@@ -130,9 +131,9 @@
                         ${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? '✅' : calendarEvent.emoji}
                     </span>
                 </li>`;
-                if (calendarEvent?.link) {
-                    html = `<li 
-                    class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' :''}" 
+            if (calendarEvent?.link) {
+                html = `<li 
+                    class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' : ''}" 
                     title="${moment(calendarEvent.date).format('Do MMMM YYYY')}">
                         <a href="${calendarEvent.link}" target="_blank">
                             <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
@@ -143,9 +144,9 @@
                             </span>
                         </a>
                     </li>`;
-                }
-                return html
-            }).join('')
+            }
+            return html
+        }).join('')
 
         beer.innerHTML = `<div class="wrapper">
             <ul>
@@ -227,12 +228,13 @@
 
     }
 
-    function doTime () {
+    function doTime() {
         setTime();
         setTimeout(() => {
             doTime();
         }, 60000);
-    }   
+    }
+
     doTime();
 
     const addCalendarButton = document.querySelector('.add-calendar-button');
@@ -302,7 +304,7 @@
 
         marksyEvents.push(newEvent);
 
-        localStorage.setItem('marksyEvents', JSON.stringify(marksyEvents));             
+        localStorage.setItem('marksyEvents', JSON.stringify(marksyEvents));
 
         addCalendarButton.classList.remove('hide');
         addCalendarWrapper.classList.remove('show');
@@ -327,7 +329,7 @@
                 dialogEvents.splice(eventIndex, 1);
                 // const parent = buttonElement.parentNode;
                 // parent.classList.add('hide');
-                localStorage.setItem('marksyEvents', JSON.stringify(dialogEvents));             
+                localStorage.setItem('marksyEvents', JSON.stringify(dialogEvents));
                 editCalendarEventsDialog.close();
                 location.reload();
             });
@@ -339,4 +341,168 @@
     dialogCancelButton.addEventListener('click', () => {
         editCalendarEventsDialog.close();
     });
-})(JSConfetti, moment);
+
+    const defaultBookmarks = [
+        {
+            id: 'sharesies',
+            emoji: "🍍",
+            title: "Sharesies",
+            url: "https://app.sharesies.nz"
+        },
+        {
+            id: 'tv1-news',
+            emoji: "📰",
+            title: "TV1 news",
+            url: "https://www.tvnz.co.nz/shows/one-news-at-6pm"
+        },
+        {
+            id: 'hacker-news',
+            emoji: "🏴‍☠️",
+            title: "Hacker news",
+            url: "https://news.ycombinator.com"
+        },
+        {
+            id: 'rnz-news',
+            emoji: "📻",
+            title: "RNZ news",
+            url: "https://www.rnz.co.nz"
+        },
+        {
+            id: 'chat-gpt',
+            emoji: "🤖",
+            title: "Chat GPT",
+            url: "https://www.chatgpt.com"
+        },
+        {
+            id: 'reddit',
+            emoji: "👽",
+            title: "Reddit",
+            url: "https://www.reddit.com"
+        },
+    ];
+
+    const getMarksyBookmarks = () => {
+        return JSON.parse(localStorage.getItem('marksyBookmarks')) && JSON.parse(localStorage.getItem('marksyBookmarks')).length > 0 ? JSON.parse(localStorage.getItem('marksyBookmarks')) : [];
+    }
+
+    const renderBookmarks = () => {
+        const linksContainer = document.querySelector('.links');
+        let bookmarkHTML = ``;
+        if (getMarksyBookmarks().length === 0) {
+            bookmarkHTML = `<p>No bookmarks found. <button type="button" class="load-bookmarks">Load defaults</button> </p>`;
+        } else {
+            getMarksyBookmarks().forEach((item, index) => {
+                bookmarkHTML += `<p>${item.emoji} <a href="${item.url}">${item.title}</a></p>`
+            });
+        }
+
+        linksContainer.innerHTML = bookmarkHTML;
+
+        const loadDefaultsButton = document.querySelector('.load-bookmarks');
+        loadDefaultsButton && loadDefaultsButton.addEventListener('click', () => {
+            localStorage.setItem('marksyBookmarks', JSON.stringify(defaultBookmarks));
+            renderBookmarks();
+        });
+    }
+    renderBookmarks();
+
+
+    const editBookmarkButton = document.querySelector('.edit-bookmarks');
+    const editBookmarkDialog = document.querySelector('.bm-dialog');
+    const editBookmarkDialogContainer = document.querySelector('.bookmark-contents');
+
+    let bookmarkEditHTML = ``;
+
+    let bookmarksToDelete = [];
+
+    const renderEditBookmarks = () => {
+        bookmarkEditHTML = ``;
+        getMarksyBookmarks().forEach((item) => {
+            bookmarkEditHTML += `<div class="row-item" id="${item.id}">${item.emoji} <span title="${item.url}">${item.title}</span> <button type="button" class="btn delete-event delete-bookmark">delete</button> </div>`
+        });
+        editBookmarkDialogContainer.innerHTML = bookmarkEditHTML;
+
+        const deleteBookmarkButton = document.querySelectorAll('.delete-bookmark');
+        deleteBookmarkButton.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                if (item.parentElement.classList.contains('strike-through')) {
+                    item.parentElement.classList.remove('strike-through','dim');
+                    bookmarksToDelete.pop(item.parentElement.id);
+                } else {
+                    item.parentElement.classList.add('strike-through', 'dim');
+                    bookmarksToDelete.push(item.parentElement.id);
+                }
+            });
+        });
+    }
+
+    const bmSaveButton = document.querySelector('.bm-dialog-save');
+    bmSaveButton.addEventListener('click', () => {
+        let newBookmarks = [];
+        getMarksyBookmarks().forEach((bookMarkItem) => {
+            if (!bookmarksToDelete.includes(bookMarkItem.id)) {
+                newBookmarks.push(bookMarkItem);
+            }
+        });
+
+        // save to LS
+        localStorage.setItem('marksyBookmarks', JSON.stringify(newBookmarks));
+        renderBookmarks();
+        bookmarkEditHTML = ``;
+        editBookmarkDialog.close();
+    });
+
+    const bmCancelButton = document.querySelector('.bm-dialog-cancel');
+    bmCancelButton.addEventListener('click', () => {
+        editBookmarkDialog.close();
+        bookmarksToDelete = [];
+    })
+
+    editBookmarkButton.addEventListener('click', () => {
+        renderEditBookmarks();
+        editBookmarkDialog.showModal();
+    });
+
+    const addBookmarkButton = document.querySelector('.add-bookmark');
+    const addBookmarkDialog = document.querySelector('.add-bm-dialog');
+    addBookmarkButton.addEventListener('click', () => {
+        addBookmarkDialog.showModal();
+    });
+
+    const addBookmarkDialogForm = document.querySelector('#bookmark-form');
+
+    addBookmarkDialogForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const emoji = document.getElementById('new-bookmark-emoji');
+        const bookmarkName = document.getElementById('new-bookmark-name');
+        const url = document.getElementById('new-bookmark-url');
+
+
+
+        const newObject = {
+            id: _.kebabCase(bookmarkName.value),
+            title: bookmarkName.value,
+            url: url.value,
+            emoji: emoji.value,
+        }
+        console.log(newObject);
+
+        const newBookmarks = getMarksyBookmarks();
+        newBookmarks.push(newObject);
+
+        localStorage.setItem('marksyBookmarks', JSON.stringify(newBookmarks));
+
+        bookmarkName.value = '';
+        url.value = '';
+        emoji.value = '';
+
+        renderBookmarks();
+        addBookmarkDialog.close();
+    })
+
+    const addBookmarkDialogButtonCancel = document.querySelector('.add-bm-dialog-cancel');
+    addBookmarkDialogButtonCancel.addEventListener('click', () => {
+        addBookmarkDialog.close();
+    });
+
+})(window.JSConfetti, window.moment, window._);

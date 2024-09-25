@@ -73,10 +73,19 @@ a:focus::after {
     content: ' 🦆';
 }
 
+.btn {
+    border: unset;
+    border-radius: unset;
+}
+
 .page-wrapper {
     padding: 2rem;
     position: relative;
+}
+
+.main-wrapper {
     display: flex;
+    flex-direction: column;
 }
 
 .strike-through {
@@ -243,17 +252,18 @@ input {
     border-radius: unset;
 }
 
-.add-calendar button.delete-event {
+.delete-event {
     border: 1px solid rgba(255,0,0,0.4);
     background-color: rgba(255,0,0,0.2);
+    color: black;
 }
 
-.add-calendar button.delete-event:hover {
+.delete-event:hover {
     border: 1px solid rgba(255,0,0,0.6);
     background-color: rgba(255,0,0,0.4);
 }
 
-.add-calendar button.dialog-cancel {
+.dialog-cancel {
     border: 1px solid black;
 }
 
@@ -302,6 +312,19 @@ dialog h1 {
     font-size: 1.25rem;
 }
 
+dialog form {
+    font-family: sans-serif;
+}
+
+dialog form label span {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+dialog input {
+    border-radius: 3px;
+}
+
 .show {
     display: block;
 }
@@ -310,3 +333,35 @@ dialog h1 {
     display: none;
 }
 
+.row-item {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.row-item span {
+    margin-left: 0.5rem;
+}
+
+.row-item .delete-event {
+    margin-left: auto;
+}
+
+.add-bookmark-wrapper {
+    min-width: 30vw;
+}
+
+.add-bookmark-wrapper label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0.75rem;
+}
+
+.new-bookmark-emoji {
+    width: 40px;
+}
+
+.add-bookmark-wrapper label span {
+    display: block;
+}

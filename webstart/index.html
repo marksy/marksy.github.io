@@ -7,23 +7,52 @@
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     </head>
     <body>
     <div class="page-wrapper">
-        <form method="get" action="https://www.google.com/search?q=" class="form">
+        <div class="main-wrapper">
             <h1 id="greeting">heljo</h1>
             <div id="time">time</div>
             <div id="date">date</div>
             <input type="hidden" name="sitesearch" />
-            <div class="links">
-                <p>🍍 <a href="https://app.sharesies.nz">Sharesies</a></p>
-                <p>📰 <a href="https://www.tvnz.co.nz/shows/one-news-at-6pm">TV1 news</a></p>
-                <p>🏴‍☠️ <a href="https://news.ycombinator.com">Hacker news</a></p>
-                <p>📻 <a href="https://www.rnz.co.nz">RNZ news</a></p>
-                <p>🤖 <a href="https://www.chatgpt.com">Chat GPT</a></p>
-                <p>👽 <a href="https://www.reddit.com">Reddit</a></p>
+            <div class="links"></div>
+        </div>
+        <div>
+            <button type="button" class="btn edit-bookmarks">Edit bookmarks</button>
+            <button type="button" class="btn add-bookmark">Add bookmark</button>
+        </div>
+        <dialog class="bm-dialog">
+            <h1>Edit bookmarks</h1>
+            <div class="bookmark-contents"></div>
+            <footer>
+                <button type="button" class="bm-dialog-cancel">Cancel</button>
+                <button type="button" class="bm-dialog-save">Save</button>
+            </footer>
+        </dialog>
+        <dialog class="add-bm-dialog">
+            <h1>Add bookmarks</h1>
+            <div class="bookmark-contents">
+                <form id="bookmark-form" class="add-bookmark-wrapper">
+                    <label>
+                        <span>Emoji</span>
+                        <input type="text" class="new-bookmark-emoji" autocomplete="off" required id="new-bookmark-emoji">
+                    </label>
+                    <label>
+                        <span>Name</span>
+                        <input type="text" autocomplete="off" required id="new-bookmark-name">
+                    </label>
+                    <label>
+                        <span>URL</span>
+                        <input type="url" required id="new-bookmark-url">
+                    </label>
+                    <footer>
+                        <button type="button" class="add-bm-dialog-cancel">Cancel</button>
+                        <button class="add-bm-dialog-save">Save</button>
+                    </footer>
+                </form>
             </div>
-        </form>
+        </dialog>
     </div>
     <div class="add-calendar">
         <div class="calendar-count"></div>
@@ -45,7 +74,7 @@
             </label>
             <label>
                 <span>Emoji</span>
-                <input type="text" id="new-calendar-event-emoji">
+                <input type="text" maxlength="1" id="new-calendar-event-emoji">
             </label>
             <label>
                 <span>Event date</span>
@@ -55,7 +84,7 @@
                 <button type="submit" class="add-calendar-event-wrapper--add">Add</button>
                 <button type="button" class="add-calendar-event-wrapper--cancel">Cancel</button>
             </div>
-        </div>
+        </form>
     </div>
         <div class="beer-wrapper">
             <div id="beer" class="beer"></div>

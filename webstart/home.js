@@ -123,7 +123,7 @@
             const rightNow = new moment();
             let html = `<li 
                 class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' : ''}" 
-                title="${moment(calendarEvent.date).format('Do MMMM YYYY')}">
+                title="${moment(calendarEvent.date).format('ddd, Do MMMM YYYY')}">
                     <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
                         ${calendarEvent.title} ${daysRemaining(calendarEvent.date)}
                     </span>
@@ -134,7 +134,7 @@
             if (calendarEvent?.link) {
                 html = `<li 
                     class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' : ''}" 
-                    title="${moment(calendarEvent.date).format('Do MMMM YYYY')}">
+                    title="${moment(calendarEvent.date).format('ddd, Do MMMM YYYY')}">
                         <a href="${calendarEvent.link}" target="_blank">
                             <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
                                 ${calendarEvent.title} ${daysRemaining(calendarEvent.date)}

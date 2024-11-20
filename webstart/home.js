@@ -51,9 +51,11 @@
         return moment(eventDate).fromNow();
     }
 
-    let beerDate
+    let beerDate;
 
     const runTimestamp = Math.round(Date.now());
+
+    let sharedCalendarEvents;
 
     function beerOclock(beerDay) {
         const dayOfWeek = beerDay || 5;
@@ -61,14 +63,7 @@
         let msg;
         const diff = date.getDay() - dayOfWeek;
         const beer = document.getElementById('beer');
-        if (diff > 0) {
-            date.setDate(date.getDate() + 6);
-        } else if (diff < 0) {
-            date.setDate(date.getDate() + ((-1) * diff));
-        }
-        date.setHours(16);
-        date.setMinutes(0);
-        date.setSeconds(0);
+
 
         const calendarEvents = [
             {
@@ -103,13 +98,23 @@
             },
         ];
 
+        sharedCalendarEvents = calendarEvents;
+
+        if (diff > 0) {
+            date.setDate(date.getDate() + 6);
+        } else if (diff < 0) {
+            date.setDate(date.getDate() + ((-1) * diff));
+        }
+        date.setHours(16);
+        date.setMinutes(0);
+        date.setSeconds(0);
+
         const addedDates = JSON.parse(localStorage.getItem('marksyEvents'));
         if (addedDates) {
             addedDates.forEach((item) => {
                 calendarEvents.push(item);
             });
         }
-        ;
 
         const numberOfCalendarEvents = calendarEvents.length;
         const cssRoot = document.querySelector(':root');
@@ -164,7 +169,6 @@
         return false;
     }
 
-
     beerOclock();
 
     const months = [
@@ -206,8 +210,7 @@
         text.startsWith('0') ? text = text.substring(1) : text
         timeBox.innerHTML = text
 
-        const formatDate = `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
-        dateBox.innerHTML = formatDate
+        dateBox.innerHTML = `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
 
         if (new Date().toDateString() === beerDate.toDateString() && new Date().getHours() === 16 && new Date().getMinutes() === 0) {
             jsConfetti.addConfetti({
@@ -223,9 +226,20 @@
                 ],
                 confettiRadius: 1,
                 confettiNumber: 200,
-            })
+            });
+            const img = './beer.png';
+            const text = `Grab yourself a cold one!`;
+            new Notification("Beer o'clock", { body: text, icon: img });
         }
 
+        const marksyEvents = JSON.parse(localStorage.getItem('marksyEvents')) || [];
+        marksyEvents.forEach((event) => {
+            if (new Date().toDateString() === new Date(event.date).toDateString() && new Date().getHours() === 9 && new Date().getMinutes() === 30) {
+                const img = './default.png';
+                const text = `${event.title} ${event.emoji}`;
+                new Notification(event.title, { body: text, icon: img });
+            }
+        });
     }
 
     function doTime() {
@@ -504,5 +518,23 @@
     addBookmarkDialogButtonCancel.addEventListener('click', () => {
         addBookmarkDialog.close();
     });
+
+    const askNotificationPermission = () => {
+        // Check if the browser supports notifications
+        if (!("Notification" in window)) {
+            console.log("This browser does not support notifications.");
+            return;
+        }
+        Notification.requestPermission().then((permission) => {
+            enableNotificationsButton.hidden = permission === "granted";
+        });
+    }
+
+    const enableNotificationsButton = document.querySelector('#enable-notifications');
+    enableNotificationsButton.addEventListener('click', askNotificationPermission);
+
+    if (Notification.permission === 'granted') {
+        enableNotificationsButton.hidden = true;
+    }
 
 })(window.JSConfetti, window.moment, window._);

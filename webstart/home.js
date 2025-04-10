@@ -537,4 +537,60 @@
         enableNotificationsButton.hidden = true;
     }
 
+    const calculateTemperatureButton = document.querySelector('#calculate-temperature-button');
+    const temperatureInput = document.querySelector('#temperature-input');
+    const calculatedTemperatureValueDiv = document.querySelector('#calculated-temperature-value-div');
+    const clearTemperatureInputButton = document.querySelector('#calculate-temperature-clear-button');
+    let convertedTemperatureValue;
+
+    const convertToFahrenheit = (celciusValue) => {
+        celciusValue = Number(celciusValue);
+        if (isNaN(celciusValue)) {
+            temperatureInput.classList.add('form-error');
+            return ''
+        } else {
+            temperatureInput.classList.remove('form-error');
+        }
+        const returnValue = (celciusValue * 1.8) + 32;
+        return `${returnValue.toFixed()}˚f`;
+    }
+    const convertToCelcius = (fahrenheitValue) => {
+        fahrenheitValue = Number(fahrenheitValue);
+        if (isNaN(fahrenheitValue)) {
+            return ''
+        } else {
+            temperatureInput.classList.remove('error');
+        }
+        const returnValue = (fahrenheitValue - 32) / 1.8;
+        return `${returnValue.toFixed()}˚c`;
+    }
+
+    calculateTemperatureButton.addEventListener('click', (e) => {
+        e.preventDefault();
+        const temperatureUnit = document.querySelector('[name="temperature-unit"]:checked');
+
+        const temperatureInputValue = temperatureInput.value;
+        const temperatureUnitValue = temperatureUnit.value;
+
+        convertedTemperatureValue = temperatureUnitValue === 'f'
+            ? convertToFahrenheit(temperatureInputValue)
+            : convertToCelcius(temperatureInputValue);
+        
+        calculatedTemperatureValueDiv.innerText = convertedTemperatureValue;
+    });
+
+    temperatureInput.addEventListener("keyup", (event) => {
+        clearTemperatureInputButton.disabled = temperatureInput.value.length <= 0
+        calculateTemperatureButton.disabled = temperatureInput.value.length <= 0
+    });
+
+
+    clearTemperatureInputButton.addEventListener('click', () => {
+        temperatureInput.classList.remove('form-error');
+        temperatureInput.value = '';
+        calculatedTemperatureValueDiv.innerText = '';
+        clearTemperatureInputButton.disabled = true;
+        calculateTemperatureButton.disabled = true;
+    });
+
 })(window.JSConfetti, window.moment, window._);

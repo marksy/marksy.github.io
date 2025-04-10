@@ -17,6 +17,24 @@
             <div id="date">date</div>
             <input type="hidden" name="sitesearch" />
             <div class="links"></div>
+            <form class="temperature-calculator-wrapper">
+                <div class="unit-wrapper">
+                    <label>
+                        <span>to ˚f</span>
+                        <input type="radio" name="temperature-unit" value="f" checked>
+                    </label>
+                    <label>
+                        <span>to ˚c</span>
+                        <input type="radio" name="temperature-unit" value="c">
+                    </label>
+                </div>
+                <div class="temp-input-button">
+                    <input placeholder="enter temperature" type="text" id="temperature-input">
+                    <button id="calculate-temperature-button" class="calculate-temperature-button" type="submit" disabled>Calculate</button>
+                    <button id="calculate-temperature-clear-button" class="calculate-temperature-clear-button" type="button" disabled>x</button>
+                </div>
+                <div id="calculated-temperature-value-div" class="calculated-temperature-value-div"></div>
+            </form>
         </div>
         <div>
             <button type="button" class="btn edit-bookmarks">Edit bookmarks</button>

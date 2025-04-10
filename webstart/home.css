@@ -406,6 +406,10 @@ dialog input {
     font-size: 2rem;
 }
 
+.temperature-input {
+    width: 102px;
+}
+
 .calculate-temperature-button {
     border-radius: 0;
     border-right: 0;

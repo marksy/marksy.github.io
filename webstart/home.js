@@ -1,5 +1,4 @@
 ((JSConfetti, moment, _) => {
-    const jsConfetti = new JSConfetti();
 
     function calcWidth() {
         const root = document.querySelector(':root');
@@ -40,10 +39,16 @@
         let randGr33tz = greetz[Math.floor(Math.random() * greetz.length)];
         greeting.innerText = randGr33tz;
         document.title = randGr33tz;
+        const jsConfetti = new JSConfetti();
         jsConfetti.addConfetti({
             confettiRadius: 4,
             confettiNumber: 300,
-        })
+        });
+        setTimeout(() => {
+            jsConfetti.clearCanvas();
+            const canvasTags = document.querySelectorAll('canvas');
+            canvasTags[0].remove();
+        }, 5000);
     })
 
 
@@ -213,6 +218,7 @@
         dateBox.innerHTML = `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
 
         if (new Date().toDateString() === beerDate.toDateString() && new Date().getHours() === 16 && new Date().getMinutes() === 0) {
+            const jsConfetti = new JSConfetti();
             jsConfetti.addConfetti({
                 emojis: [
                     '🍻',
@@ -230,6 +236,11 @@
             const img = './beer.png';
             const text = `Grab yourself a cold one!`;
             new Notification("Beer o'clock", { body: text, icon: img });
+            setTimeout(() => {
+                jsConfetti.clearCanvas();
+                const canvasTags = document.querySelectorAll('canvas');
+                canvasTags[0].remove();
+            }, 5000);
         }
 
         const marksyEvents = JSON.parse(localStorage.getItem('marksyEvents')) || [];

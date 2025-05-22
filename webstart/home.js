@@ -586,7 +586,7 @@
         convertedTemperatureValue = temperatureUnitValue === 'f'
             ? convertToFahrenheit(temperatureInputValue)
             : convertToCelcius(temperatureInputValue);
-        
+
         calculatedTemperatureValueDiv.innerText = convertedTemperatureValue;
     });
 
@@ -603,5 +603,63 @@
         clearTemperatureInputButton.disabled = true;
         calculateTemperatureButton.disabled = true;
     });
+
+    (() => {
+        const calculateSpeedButton = document.querySelector('#calculate-speed-button');
+        const speedInput = document.querySelector('#speed-input');
+        const calculatedSpeedValueDiv = document.querySelector('#calculated-speed-value-div');
+        const clearSpeedInputButton = document.querySelector('#calculate-speed-clear-button');
+        let convertedSpeedValue;
+
+        const convertToMPH = (kmphValue) => {
+            kmphValue = Number(kmphValue);
+            if (isNaN(kmphValue)) {
+                speedInput.classList.add('form-error');
+                return ''
+            } else {
+                speedInput.classList.remove('form-error');
+            }
+            const returnValue = kmphValue * 0.621371;
+            return `${returnValue.toFixed()} mph`;
+        }
+        const convertToKMPH = (mphValue) => {
+            mphValue = Number(mphValue);
+            if (isNaN(mphValue)) {
+                return ''
+            } else {
+                speedInput.classList.remove('error');
+            }
+            const returnValue = mphValue / 0.621371;
+            return `${returnValue.toFixed()} kmph`;
+        }
+
+        calculateSpeedButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const speedUnit = document.querySelector('[name="speed-unit"]:checked');
+
+            const speedInputValue = speedInput.value;
+            const speedUnitValue = speedUnit.value;
+
+            convertedSpeedValue = speedUnitValue === 'mph'
+                ? convertToMPH(speedInputValue)
+                : convertToKMPH(speedInputValue);
+
+            calculatedSpeedValueDiv.innerText = convertedSpeedValue;
+        });
+
+        speedInput.addEventListener("keyup", (event) => {
+            clearSpeedInputButton.disabled = speedInput.value.length <= 0
+            calculateSpeedButton.disabled = speedInput.value.length <= 0
+        });
+
+
+        clearSpeedInputButton.addEventListener('click', () => {
+            temperatureInput.classList.remove('form-error');
+            temperatureInput.value = '';
+            calculatedSpeedValueDiv.innerText = '';
+            clearSpeedInputButton.disabled = true;
+            calculateSpeedButton.disabled = true;
+        });
+    })();
 
 })(window.JSConfetti, window.moment, window._);

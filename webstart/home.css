@@ -55,7 +55,7 @@ p {
     font-size: 1rem;
 }
 
-h1, p {
+h1, p, fieldset {
     font-family: monospace;
 }
 a, a:hover {
@@ -110,7 +110,8 @@ label {
 }
 
 button,
-input {
+input,
+fieldset {
     margin: 0;
     padding: 6px;
     font-size: 12px;
@@ -401,8 +402,7 @@ dialog input {
 .calculated-temperature-value-div {
     position: absolute;
     bottom: -3rem;
-    left: calc(50% - 1.5rem);
-
+    right: 0;
     font-size: 2rem;
 }
 
@@ -415,6 +415,46 @@ dialog input {
     border-right: 0;
 }
 
+.speed-calculator-wrapper {
+    position: absolute;
+    right: 1rem;
+    bottom: -160px;
+    display: flex;
+    flex-direction: column;
+}
+.speed-input-button {
+    display: flex;
+}
+
+.calculated-speed-value-div {
+    position: absolute;
+    bottom: -3rem;
+    right: 0;
+    font-size: 2rem;
+}
+
+.speed-input {
+    width: 102px;
+}
+
+.calculate-speed-button {
+    border-radius: 0;
+    border-right: 0;
+}
+
 button:disabled {
     opacity: 0.5;
+}
+
+fieldset {
+    border: 1px solid var(--main-fg-color);
+    border-radius: 5px;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--main-fg-color);
+}
+
+fieldset legend {
+    font-size: 0.75rem;
+    text-transform: uppercase;
 }

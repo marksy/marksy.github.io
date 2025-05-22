@@ -18,22 +18,46 @@
             <input type="hidden" name="sitesearch" />
             <div class="links"></div>
             <form class="temperature-calculator-wrapper">
-                <div class="unit-wrapper">
-                    <label>
-                        <span>to ˚f</span>
-                        <input type="radio" name="temperature-unit" value="f" checked>
-                    </label>
-                    <label>
-                        <span>to ˚c</span>
-                        <input type="radio" name="temperature-unit" value="c">
-                    </label>
-                </div>
-                <div class="temp-input-button">
-                    <input placeholder="enter temperature" type="text" id="temperature-input" class="temperature-input">
-                    <button id="calculate-temperature-button" class="calculate-temperature-button" type="submit" disabled>Calculate</button>
-                    <button id="calculate-temperature-clear-button" class="calculate-temperature-clear-button" type="button" disabled>x</button>
-                </div>
-                <div id="calculated-temperature-value-div" class="calculated-temperature-value-div"></div>
+                <fieldset>
+                    <legend>temperature</legend>
+                    <div class="unit-wrapper">
+                        <label>
+                            <span>to ˚f</span>
+                            <input type="radio" name="temperature-unit" value="f" checked>
+                        </label>
+                        <label>
+                            <span>to ˚c</span>
+                            <input type="radio" name="temperature-unit" value="c">
+                        </label>
+                    </div>
+                    <div class="temp-input-button">
+                        <input placeholder="enter temperature" type="text" id="temperature-input" class="temperature-input">
+                        <button id="calculate-temperature-button" class="calculate-temperature-button" type="submit" disabled>Calculate</button>
+                        <button id="calculate-temperature-clear-button" class="calculate-temperature-clear-button" type="button" disabled>x</button>
+                    </div>
+                    <div id="calculated-temperature-value-div" class="calculated-temperature-value-div"></div>
+                </fieldset>
+            </form>
+            <form class="speed-calculator-wrapper">
+                <fieldset>
+                    <legend>speed</legend>
+                    <div class="unit-wrapper">
+                        <label>
+                            <span>to kmph</span>
+                            <input type="radio" name="speed-unit" value="kmph" checked>
+                        </label>
+                        <label>
+                            <span>to mph</span>
+                            <input type="radio" name="speed-unit" value="mph">
+                        </label>
+                    </div>
+                    <div class="speed-input-button">
+                        <input placeholder="enter speed" type="text" id="speed-input" class="speed-input">
+                        <button id="calculate-speed-button" class="calculate-speed-button" type="submit" disabled>Calculate</button>
+                        <button id="calculate-speed-clear-button" class="calculate-speed-clear-button" type="button" disabled>x</button>
+                    </div>
+                    <div id="calculated-speed-value-div" class="calculated-speed-value-div"></div>
+                </fieldset>
             </form>
         </div>
         <div>

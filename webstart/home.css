@@ -1,6 +1,7 @@
 :root {
     --main-bg-color: #d6e7ee;
     --main-fg-color: #585d5e;
+    --main-fg-color-hover: #456bb8;
     --transition-speed: 500ms;
     --amount: -200px;
     --duration: 80s;
@@ -62,11 +63,11 @@ a, a:hover {
     color: var(--main-fg-color);
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-bottom-color 222ms;
+    transition: color 222ms;
 }
 
 a:hover {
-    border-color: var(--main-fg-color);
+    color: var(--main-fg-color-hover);
 }
 
 a:focus::after {

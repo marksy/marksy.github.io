@@ -418,7 +418,7 @@
             bookmarkHTML = `<p>No bookmarks found. <button type="button" class="load-bookmarks">Load defaults</button> </p>`;
         } else {
             getMarksyBookmarks().forEach((item, index) => {
-                bookmarkHTML += `<p>${item.emoji} <a href="${item.url}">${item.title}</a></p>`
+                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title}</a></p>`
             });
         }
 

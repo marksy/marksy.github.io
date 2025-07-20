@@ -1,13 +1,16 @@
 ((JSConfetti, moment, _) => {
 
+    const qs = (s) => document.querySelector(s);
+    const qa = (s) => document.querySelectorAll(s);
+
     function calcWidth() {
-        const root = document.querySelector(':root');
-        const el = document.querySelector('#beer .wrapper ul');
+        const root = qs(':root');
+        const el = qs('#beer .wrapper ul');
         const width = el.offsetWidth;
         root.style.setProperty('--amount', `-${width + 2}px`);
     }
 
-    const greeting = document.querySelector('#greeting');
+    const greeting = qs('#greeting');
     const greetz = [
         'kia ora',
         'hëj',
@@ -47,7 +50,7 @@
         });
         setTimeout(() => {
             jsConfetti.clearCanvas();
-            const canvasTags = document.querySelectorAll('canvas');
+            const canvasTags = qa('canvas');
             canvasTags[0].remove();
         }, 5000);
     })
@@ -77,31 +80,6 @@
                 date: date,
                 emoji: `🍺`,
             },
-            {
-                title: `Easter`,
-                date: '2024-03-29',
-                emoji: `🐰`,
-            },
-            {
-                title: `ANZAC day`,
-                date: '2024-04-25',
-                emoji: `🌺`,
-            },
-            {
-                title: `Labour day`,
-                date: '2024-10-28',
-                emoji: `👷‍♂️`,
-            },
-            {
-                title: `Christmas`,
-                date: '2024-12-25',
-                emoji: `🎄`,
-            },
-            {
-                title: `New Year's Eve`,
-                date: '2024-12-31',
-                emoji: `🎆`,
-            },
         ];
 
         sharedCalendarEvents = calendarEvents;
@@ -123,16 +101,16 @@
         }
 
         const numberOfCalendarEvents = calendarEvents.length;
-        const cssRoot = document.querySelector(':root');
+        const cssRoot = qs(':root');
         cssRoot.style.setProperty('--duration', `${14 * numberOfCalendarEvents}s`);
 
-        const calendarCount = document.querySelector('.calendar-count');
+        const calendarCount = qs('.calendar-count');
         calendarCount.textContent = `${numberOfCalendarEvents} event${numberOfCalendarEvents > 1 ? 's' : ''}`
 
         const sortedArray = calendarEvents.sort((a, b) => new moment(a.date).format('X') - new moment(b.date).format('X'))
         const list = sortedArray.map((calendarEvent) => {
             const rightNow = new moment();
-            let html = `<li 
+            return `<li 
                 class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' : ''}" 
                 title="${moment(calendarEvent.date).format('ddd, Do MMMM YYYY')}">
                     <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
@@ -142,21 +120,6 @@
                         ${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? '✅' : calendarEvent.emoji}
                     </span>
                 </li>`;
-            if (calendarEvent?.link) {
-                html = `<li 
-                    class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' : ''}" 
-                    title="${moment(calendarEvent.date).format('ddd, Do MMMM YYYY')}">
-                        <a href="${calendarEvent.link}" target="_blank">
-                            <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
-                                ${calendarEvent.title} ${daysRemaining(calendarEvent.date)}
-                            </span>
-                            <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'dim' : ''}">
-                                ${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? '✅' : calendarEvent.emoji}
-                            </span>
-                        </a>
-                    </li>`;
-            }
-            return html
         }).join('')
 
         beer.innerHTML = `<div class="wrapper">
@@ -202,8 +165,8 @@
         'Sat',
     ]
 
-    const timeBox = document.querySelector('#time');
-    const dateBox = document.querySelector('#date');
+    const timeBox = qs('#time');
+    const dateBox = qs('#date');
 
     function setTime() {
         const now = new Date();
@@ -239,7 +202,7 @@
             new Notification("Beer o'clock", { body: text, icon: img });
             setTimeout(() => {
                 jsConfetti.clearCanvas();
-                const canvasTags = document.querySelectorAll('canvas');
+                const canvasTags = qa('canvas');
                 canvasTags[0].remove();
             }, 5000);
         }
@@ -263,19 +226,19 @@
 
     doTime();
 
-    const addCalendarButton = document.querySelector('.add-calendar-button');
-    const addCalendarWrapper = document.querySelector('.add-calendar-event-wrapper');
-    const addCalendarWrapperCancel = document.querySelector('.add-calendar-event-wrapper--cancel');
-    const addCalendarWrapperAdd = document.querySelector('.add-calendar-event-wrapper--add');
+    const addCalendarButton = qs('.add-calendar-button');
+    const addCalendarWrapper = qs('.add-calendar-event-wrapper');
+    const addCalendarWrapperCancel = qs('.add-calendar-event-wrapper--cancel');
+    const addCalendarWrapperAdd = qs('.add-calendar-event-wrapper--add');
 
-    const newCalendarEventName = document.querySelector('#new-calendar-event-name');
-    const newCalendarEventEmoji = document.querySelector('#new-calendar-event-emoji');
-    const newCalendarEventDate = document.querySelector('#new-calendar-event-date');
+    const newCalendarEventName = qs('#new-calendar-event-name');
+    const newCalendarEventEmoji = qs('#new-calendar-event-emoji');
+    const newCalendarEventDate = qs('#new-calendar-event-date');
 
-    const editCalendarEventsButton = document.querySelector('.edit-calendar-button');
-    const editCalendarEventsDialog = document.querySelector('.dialog');
-    const dialogCancelButton = document.querySelector('.dialog-cancel');
-    const dialogEventsContainer = document.querySelector('#dialog-events');
+    const editCalendarEventsButton = qs('.edit-calendar-button');
+    const editCalendarEventsDialog = qs('.dialog');
+    const dialogCancelButton = qs('.dialog-cancel');
+    const dialogEventsContainer = qs('#dialog-events');
 
     let dialogEvents = JSON.parse(localStorage.getItem('marksyEvents')) || [];
 
@@ -348,7 +311,7 @@
 
         dialogEventsContainer.innerHTML = html;
 
-        const deleteButtons = document.querySelectorAll('.delete-event');
+        const deleteButtons = qa('.delete-event');
         deleteButtons.forEach(buttonElement => {
             buttonElement.addEventListener('click', () => {
                 const eventIndex = buttonElement.dataset.index;
@@ -412,7 +375,7 @@
     }
 
     const renderBookmarks = () => {
-        const linksContainer = document.querySelector('.links');
+        const linksContainer = qs('.links');
         let bookmarkHTML = ``;
         if (getMarksyBookmarks().length === 0) {
             bookmarkHTML = `<p>No bookmarks found. <button type="button" class="load-bookmarks">Load defaults</button> </p>`;
@@ -424,7 +387,7 @@
 
         linksContainer.innerHTML = bookmarkHTML;
 
-        const loadDefaultsButton = document.querySelector('.load-bookmarks');
+        const loadDefaultsButton = qs('.load-bookmarks');
         loadDefaultsButton && loadDefaultsButton.addEventListener('click', () => {
             localStorage.setItem('marksyBookmarks', JSON.stringify(defaultBookmarks));
             renderBookmarks();
@@ -433,9 +396,9 @@
     renderBookmarks();
 
 
-    const editBookmarkButton = document.querySelector('.edit-bookmarks');
-    const editBookmarkDialog = document.querySelector('.bm-dialog');
-    const editBookmarkDialogContainer = document.querySelector('.bookmark-contents');
+    const editBookmarkButton = qs('.edit-bookmarks');
+    const editBookmarkDialog = qs('.bm-dialog');
+    const editBookmarkDialogContainer = qs('.bookmark-contents');
 
     let bookmarkEditHTML = ``;
 
@@ -448,7 +411,7 @@
         });
         editBookmarkDialogContainer.innerHTML = bookmarkEditHTML;
 
-        const deleteBookmarkButton = document.querySelectorAll('.delete-bookmark');
+        const deleteBookmarkButton = qa('.delete-bookmark');
         deleteBookmarkButton.forEach((item, index) => {
             item.addEventListener('click', () => {
                 if (item.parentElement.classList.contains('strike-through')) {
@@ -462,7 +425,7 @@
         });
     }
 
-    const bmSaveButton = document.querySelector('.bm-dialog-save');
+    const bmSaveButton = qs('.bm-dialog-save');
     bmSaveButton.addEventListener('click', () => {
         let newBookmarks = [];
         getMarksyBookmarks().forEach((bookMarkItem) => {
@@ -478,7 +441,7 @@
         editBookmarkDialog.close();
     });
 
-    const bmCancelButton = document.querySelector('.bm-dialog-cancel');
+    const bmCancelButton = qs('.bm-dialog-cancel');
     bmCancelButton.addEventListener('click', () => {
         editBookmarkDialog.close();
         bookmarksToDelete = [];
@@ -489,13 +452,13 @@
         editBookmarkDialog.showModal();
     });
 
-    const addBookmarkButton = document.querySelector('.add-bookmark');
-    const addBookmarkDialog = document.querySelector('.add-bm-dialog');
+    const addBookmarkButton = qs('.add-bookmark');
+    const addBookmarkDialog = qs('.add-bm-dialog');
     addBookmarkButton.addEventListener('click', () => {
         addBookmarkDialog.showModal();
     });
 
-    const addBookmarkDialogForm = document.querySelector('#bookmark-form');
+    const addBookmarkDialogForm = qs('#bookmark-form');
 
     addBookmarkDialogForm.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -526,7 +489,7 @@
         addBookmarkDialog.close();
     })
 
-    const addBookmarkDialogButtonCancel = document.querySelector('.add-bm-dialog-cancel');
+    const addBookmarkDialogButtonCancel = qs('.add-bm-dialog-cancel');
     addBookmarkDialogButtonCancel.addEventListener('click', () => {
         addBookmarkDialog.close();
     });
@@ -542,51 +505,39 @@
         });
     }
 
-    const enableNotificationsButton = document.querySelector('#enable-notifications');
+    const enableNotificationsButton = qs('#enable-notifications');
     enableNotificationsButton.addEventListener('click', askNotificationPermission);
 
     if (Notification.permission === 'granted') {
         enableNotificationsButton.hidden = true;
     }
 
-    const calculateTemperatureButton = document.querySelector('#calculate-temperature-button');
-    const temperatureInput = document.querySelector('#temperature-input');
-    const calculatedTemperatureValueDiv = document.querySelector('#calculated-temperature-value-div');
-    const clearTemperatureInputButton = document.querySelector('#calculate-temperature-clear-button');
+    const calculateTemperatureButton = qs('#calculate-temperature-button');
+    const temperatureInput = qs('#temperature-input');
+    const calculatedTemperatureValueDiv = qs('#calculated-temperature-value-div');
+    const clearTemperatureInputButton = qs('#calculate-temperature-clear-button');
     let convertedTemperatureValue;
 
-    const convertToFahrenheit = (celciusValue) => {
-        celciusValue = Number(celciusValue);
-        if (isNaN(celciusValue)) {
+    const convertTemp = (inputValue, toUnit) => {
+        inputValue = Number(inputValue);
+        if (isNaN(inputValue)) {
             temperatureInput.classList.add('form-error');
             return ''
         } else {
             temperatureInput.classList.remove('form-error');
         }
-        const returnValue = (celciusValue * 1.8) + 32;
-        return `${returnValue.toFixed()}˚f`;
-    }
-    const convertToCelcius = (fahrenheitValue) => {
-        fahrenheitValue = Number(fahrenheitValue);
-        if (isNaN(fahrenheitValue)) {
-            return ''
-        } else {
-            temperatureInput.classList.remove('error');
-        }
-        const returnValue = (fahrenheitValue - 32) / 1.8;
-        return `${returnValue.toFixed()}˚c`;
+        const returnValue = toUnit === 'f' ? (inputValue * 1.8) + 32 : (inputValue - 32) / 1.8;
+        return `${returnValue.toFixed()}˚${toUnit}`;
     }
 
     calculateTemperatureButton.addEventListener('click', (e) => {
         e.preventDefault();
-        const temperatureUnit = document.querySelector('[name="temperature-unit"]:checked');
+        const temperatureUnit = qs('[name="temperature-unit"]:checked');
 
         const temperatureInputValue = temperatureInput.value;
         const temperatureUnitValue = temperatureUnit.value;
 
-        convertedTemperatureValue = temperatureUnitValue === 'f'
-            ? convertToFahrenheit(temperatureInputValue)
-            : convertToCelcius(temperatureInputValue);
+        convertedTemperatureValue = convertTemp(temperatureInputValue,temperatureUnitValue)
 
         calculatedTemperatureValueDiv.innerText = convertedTemperatureValue;
     });
@@ -606,44 +557,32 @@
     });
 
     (() => {
-        const calculateSpeedButton = document.querySelector('#calculate-speed-button');
-        const speedInput = document.querySelector('#speed-input');
-        const calculatedSpeedValueDiv = document.querySelector('#calculated-speed-value-div');
-        const clearSpeedInputButton = document.querySelector('#calculate-speed-clear-button');
+        const calculateSpeedButton = qs('#calculate-speed-button');
+        const speedInput = qs('#speed-input');
+        const calculatedSpeedValueDiv = qs('#calculated-speed-value-div');
+        const clearSpeedInputButton = qs('#calculate-speed-clear-button');
         let convertedSpeedValue;
 
-        const convertToMPH = (kmphValue) => {
-            kmphValue = Number(kmphValue);
-            if (isNaN(kmphValue)) {
+        const convertSpeed = (inputValue, toUnit) => {
+            inputValue = Number(inputValue);
+            if (isNaN(inputValue)) {
                 speedInput.classList.add('form-error');
                 return ''
             } else {
                 speedInput.classList.remove('form-error');
             }
-            const returnValue = kmphValue * 0.621371;
+            const returnValue = toUnit === 'mph' ? inputValue * 0.621371 : inputValue / 0.621371;
             return `${returnValue.toFixed()} mph`;
-        }
-        const convertToKMPH = (mphValue) => {
-            mphValue = Number(mphValue);
-            if (isNaN(mphValue)) {
-                return ''
-            } else {
-                speedInput.classList.remove('error');
-            }
-            const returnValue = mphValue / 0.621371;
-            return `${returnValue.toFixed()} kmph`;
         }
 
         calculateSpeedButton.addEventListener('click', (e) => {
             e.preventDefault();
-            const speedUnit = document.querySelector('[name="speed-unit"]:checked');
+            const speedUnit = qs('[name="speed-unit"]:checked');
 
             const speedInputValue = speedInput.value;
             const speedUnitValue = speedUnit.value;
 
-            convertedSpeedValue = speedUnitValue === 'mph'
-                ? convertToMPH(speedInputValue)
-                : convertToKMPH(speedInputValue);
+            convertedSpeedValue = convertSpeed(speedInputValue,speedUnitValue);
 
             calculatedSpeedValueDiv.innerText = convertedSpeedValue;
         });

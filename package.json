@@ -1,0 +1,20 @@
+{
+  "name": "marksy-io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "home.js",
+  "scripts": {
+    "build:js": "uglifyjs './src/home.js' --compress --mangle --output './webstart/home.min.js'",
+    "build:css": "uglifycss './src/home.css' --output './webstart/home.min.css' && uglifycss './src/darkmode.css' --output './webstart/darkmode.min.css'",
+    "build": "yarn build:js && yarn build:css",
+    "dev": "yarn http-server ./webstart"
+  },
+  "author": "",
+  "license": "ISC",
+  "packageManager": "yarn@4.9.2",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "uglify-js": "^3.19.3",
+    "uglifycss": "^0.0.29"
+  }
+}

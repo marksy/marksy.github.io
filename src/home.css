@@ -1,6 +1,8 @@
 :root {
-    --main-bg-color: #d6e7ee;
-    --main-fg-color: #585d5e;
+    --main-bg-color-1: #6b97f7;
+    --main-bg-color-2: #7525e2;
+    --main-bg-color-3: #f7137e;
+    --main-fg-color: #ffffff;
     --main-fg-color-hover: #456bb8;
     --transition-speed: 500ms;
     --amount: -200px;
@@ -9,7 +11,9 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --main-bg-color: #253436;
+        --main-bg-color-1: #324876;
+        --main-bg-color-2: #50199b;
+        --main-bg-color-3: #870b45;
         --main-fg-color: #95b7bd;
     }
 }
@@ -39,7 +43,11 @@
 }
 
 body {
-    background-color: var(--main-bg-color);
+    background: linear-gradient(334deg, var(--main-bg-color-1), var(--main-bg-color-2), var(--main-bg-color-3));
+    background-size: 180% 180%;
+    animation: gradient-animation 6s ease infinite;
+    width: 100vw;
+    height: 100vh;
     color: var(--main-fg-color);
     transition: background-color var(--transition-speed), color var(--transition-speed);
     margin: 0;
@@ -229,12 +237,6 @@ input {
 }
 
 @media (prefers-color-scheme: dark) {
-    body,
-    html {
-        color: rgba(255,255,255,0.7);
-        background: #343435;
-    }
-
     input,
     button {
         color: rgba(255,255,255,0.7);
@@ -458,4 +460,17 @@ fieldset {
 fieldset legend {
     font-size: 0.75rem;
     text-transform: uppercase;
+}
+
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }

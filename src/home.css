@@ -68,7 +68,7 @@
 body {
     background: linear-gradient(334deg, var(--main-bg-color-1), var(--main-bg-color-2), var(--main-bg-color-3));
     background-size: 180% 180%;
-    animation: gradient-animation 12s ease infinite;
+    animation: gradient-animation 15s ease infinite;
     width: 100vw;
     height: 100vh;
     color: var(--main-fg-color);

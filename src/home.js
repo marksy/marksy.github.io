@@ -3,12 +3,53 @@
     const qs = (s) => document.querySelector(s);
     const qa = (s) => document.querySelectorAll(s);
 
-    function calcWidth() {
+    const calcWidth = ()=> {
         const root = qs(':root');
         const el = qs('#beer .wrapper ul');
         const width = el.offsetWidth;
         root.style.setProperty('--amount', `-${width + 2}px`);
     }
+
+    // create a random hsl
+    const generateRandomNumberBetween30and360 = () => Math.floor(Math.random() * (360 - 30 + 1)) + 30;
+
+    const dark = '60%, 35%';
+    const light = '70%, 50%';
+
+    // create css properties on the window with generated hsl
+    window.CSS.registerProperty({
+        name: "--main-bg-color-1",
+        syntax: '<color>',
+        initialValue: `hsl(${generateRandomNumberBetween30and360()}, ${window.matchMedia('(prefers-color-scheme: dark)').matches ? dark : light})`,
+        inherits: false,
+    });
+    window.CSS.registerProperty({
+        name: "--main-bg-color-2",
+        syntax: '<color>',
+        initialValue: `hsl(${generateRandomNumberBetween30and360()}, ${window.matchMedia('(prefers-color-scheme: dark)').matches ? dark : light})`,
+        inherits: false,
+    });
+    window.CSS.registerProperty({
+        name: "--main-bg-color-3",
+        syntax: '<color>',
+        initialValue: `hsl(${generateRandomNumberBetween30and360()}, ${window.matchMedia('(prefers-color-scheme: dark)').matches ? dark : light})`,
+        inherits: false,
+    });
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
+        const newColorScheme = event.matches ? "dark" : "light";
+        console.log(newColorScheme);
+        if (newColorScheme === "dark") {
+            document.documentElement.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+            document.documentElement.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+            document.documentElement.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+        } else {
+            document.documentElement.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+            document.documentElement.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+            document.documentElement.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+        }
+    });
+
 
     const greeting = qs('#greeting');
     const greetz = [
@@ -56,9 +97,7 @@
     })
 
 
-    function daysRemaining(eventDate) {
-        return moment(eventDate).fromNow();
-    }
+    const daysRemaining = (eventDate) => moment(eventDate).fromNow();
 
     let beerDate;
 
@@ -66,7 +105,7 @@
 
     let sharedCalendarEvents;
 
-    function beerOclock(beerDay) {
+    const beerOclock = (beerDay) => {
         const dayOfWeek = beerDay || 5;
         const date = new Date(runTimestamp);
         let msg;
@@ -168,7 +207,7 @@
     const timeBox = qs('#time');
     const dateBox = qs('#date');
 
-    function setTime() {
+    const setTime = () => {
         const now = new Date();
         const withPmAm = now.toLocaleTimeString('en-US', {
             // en-US can be set to 'default' to use user's browser settings
@@ -217,7 +256,7 @@
         });
     }
 
-    function doTime() {
+    const doTime = () => {
         setTime();
         setTimeout(() => {
             doTime();

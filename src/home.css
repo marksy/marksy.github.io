@@ -1,7 +1,4 @@
 :root {
-    --main-bg-color-1: #6b97f7;
-    --main-bg-color-2: #7525e2;
-    --main-bg-color-3: #f7137e;
     --main-fg-color: #ffffff;
     --main-fg-color-hover: #456bb8;
     --transition-speed: 500ms;
@@ -9,13 +6,39 @@
     --duration: 80s;
 }
 
+@property --main-bg-color-1 {
+    syntax: '<color>';
+    initial-value: #6b97f7;
+    inherits: false;
+}
+@property --main-bg-color-2 {
+    syntax: '<color>';
+    initial-value: #7525e2;
+    inherits: false;
+}
+@property --main-bg-color-3 {
+    syntax: '<color>';
+    initial-value: #f7137e;
+    inherits: false;
+}
+
 @media (prefers-color-scheme: dark) {
-    :root {
-        --main-bg-color-1: #324876;
-        --main-bg-color-2: #50199b;
-        --main-bg-color-3: #870b45;
+        @property --main-bg-color-1 {
+            syntax: '<color>';
+            initial-value: #324876;
+            inherits: false;
+        }
+        @property --main-bg-color-2 {
+            syntax: '<color>';
+            initial-value: #50199b;
+            inherits: false;
+        }
+        @property --main-bg-color-3 {
+            syntax: '<color>';
+            initial-value: #870b45;
+            inherits: false;
+        }
         --main-fg-color: #95b7bd;
-    }
 }
 
 @keyframes blinker {
@@ -49,7 +72,7 @@ body {
     width: 100vw;
     height: 100vh;
     color: var(--main-fg-color);
-    transition: background-color var(--transition-speed), color var(--transition-speed);
+    transition: --main-bg-color-1 var(--transition-speed), --main-bg-color-2 var(--transition-speed), --main-bg-color-3 var(--transition-speed), background-color var(--transition-speed), color var(--transition-speed);
     margin: 0;
     padding: 0;
 }

@@ -205,6 +205,7 @@
     ]
 
     const timeBox = qs('#time');
+    const usTimeBox = qs('#us-time');
     const dateBox = qs('#date');
 
     const setTime = () => {
@@ -214,9 +215,19 @@
             hour: '2-digit',
             minute: '2-digit',
         });
-        let text = withPmAm.replace(':', '<span>:</span>')
+        const centralTime = new Date().toLocaleString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'America/Chicago'
+        });
+
+        let text = withPmAm.replace(':', '<span class="blink">:</span>')
         text.startsWith('0') ? text = text.substring(1) : text
         timeBox.innerHTML = text
+
+        let usText = centralTime.replace(':', '<span class="blink">:</span>')
+        usText.startsWith('0') ? usText = usText.substring(1) : usText
+        usTimeBox.innerHTML = `🌎 ${usText}`
 
         dateBox.innerHTML = `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
 

@@ -137,5 +137,39 @@
             <div id="beer" class="beer"></div>
         </div>
         <script defer src="home.min.js"></script>
+        <script>
+            // Patch: ensure background color updates apply to the element that uses the CSS vars
+            (function() {
+                function setColors(scheme) {
+                    var dark = '60%, 35%';
+                    var light = '70%, 50%';
+                    var h = function() { return Math.floor(Math.random() * (360 - 30 + 1)) + 30; };
+                    var target = document.body;
+                    if (scheme === 'dark') {
+                        target.style.setProperty('--main-bg-color-1', 'hsl(' + h() + ', ' + dark + ')');
+                        target.style.setProperty('--main-bg-color-2', 'hsl(' + h() + ', ' + dark + ')');
+                        target.style.setProperty('--main-bg-color-3', 'hsl(' + h() + ', ' + dark + ')');
+                    } else {
+                        target.style.setProperty('--main-bg-color-1', 'hsl(' + h() + ', ' + light + ')');
+                        target.style.setProperty('--main-bg-color-2', 'hsl(' + h() + ', ' + light + ')');
+                        target.style.setProperty('--main-bg-color-3', 'hsl(' + h() + ', ' + light + ')');
+                    }
+                }
+                document.addEventListener('DOMContentLoaded', function() {
+                    var btn = document.querySelector('#background');
+                    if (btn) {
+                        btn.addEventListener('click', function() {
+                            document.body.style.setProperty('--main-bg-color-1', 'red');
+                        });
+                    }
+                    try {
+                        var mm = window.matchMedia('(prefers-color-scheme: dark)');
+                        if (mm && mm.addEventListener) {
+                            mm.addEventListener('change', function(e){ setColors(e.matches ? 'dark' : 'light'); });
+                        }
+                    } catch (e) {}
+                });
+            })();
+        </script>
     </body>
 </html>

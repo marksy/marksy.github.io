@@ -36,17 +36,30 @@
         inherits: false,
     });
 
+    const updateBackground =() => {
+        const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        if (isDarkMode) {
+            document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+            document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+            document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+        } else {
+            document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+            document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+            document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+        }
+    };
+
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
         const newColorScheme = event.matches ? "dark" : "light";
         console.log(newColorScheme);
         if (newColorScheme === "dark") {
-            document.documentElement.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
-            document.documentElement.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
-            document.documentElement.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+            document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+            document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
+            document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
         } else {
-            document.documentElement.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
-            document.documentElement.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
-            document.documentElement.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+            document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+            document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
+            document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
         }
     });
 
@@ -94,6 +107,7 @@
             const canvasTags = qa('canvas');
             canvasTags[0].remove();
         }, 5000);
+        updateBackground();
     })
 
 

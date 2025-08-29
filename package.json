@@ -10,7 +10,7 @@
     "dev": "yarn http-server ./webstart"
   },
   "author": "",
-  "license": "ISC",
+  "license": "ISC"  ,
   "devDependencies": {
     "http-server": "^14.1.1",
     "uglify-js": "^3.19.3",

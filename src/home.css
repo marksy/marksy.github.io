@@ -87,7 +87,7 @@ p {
     font-size: 1rem;
 }
 
-h1, p, fieldset {
+h1, p, fieldset, form {
     font-family: monospace;
 }
 a, a:hover {

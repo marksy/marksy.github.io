@@ -68,7 +68,12 @@
     };
 
     document.addEventListener("keydown", (e) => {
-        if (e.key === "/" && document.activeElement.id !== "search") {
+        if (e.key === "/" &&
+            document.activeElement.id !== "search" &&
+            document.activeElement.id !== "new-bookmark-url" &&
+            document.activeElement.id !== "new-calendar-event-name" &&
+            document.activeElement.id !== "new-calendar-event-date"
+        ) {
             e.preventDefault();
             document.getElementById("search").focus();
         }

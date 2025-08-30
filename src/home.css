@@ -543,8 +543,9 @@ fieldset legend {
     position: absolute;
     top: 1rem;
     opacity: 1;
-    transform: translateY(0);
-    transition: opacity 500ms, transform 500ms;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+    transition: opacity 500ms, transform 500ms, filter 500ms;
 }
 
 #search:focus {
@@ -553,7 +554,8 @@ fieldset legend {
 
 #search:focus + .hint {
     opacity: 0;
-    transform: translateY(3rem);
+    transform: translateY(4rem) scale(3);
+    filter: blur(10px);
 }
 
 @keyframes gradient-animation {

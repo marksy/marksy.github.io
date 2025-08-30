@@ -74,7 +74,7 @@
         }
     });
 
-    const greeting = qs('#greeting');
+    const greeting = qs('#greeting h1');
     const greetz = [
         'kia ora',
         'hëj',

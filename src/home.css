@@ -520,14 +520,32 @@ fieldset legend {
     border-radius: 25px;
     padding: 0.5rem 1rem;
     border: 2px solid var(--main-fg-color);
-    margin: 1rem auto;
     transform: translateY(-60px);
     transition: transform 222ms;
+    margin-top: 1rem;
     box-shadow: rgba(10,10,10,0.7) 0 0 25px;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+}
+
+.hint {
+    position: absolute;
+    top: 1rem;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 500ms, transform 500ms;
 }
 
 #search:focus {
     transform: translateY(0);
+}
+
+#search:focus + .hint {
+    opacity: 0;
+    transform: translateY(3rem);
 }
 
 @keyframes gradient-animation {

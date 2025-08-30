@@ -516,6 +516,19 @@ fieldset legend {
     text-transform: uppercase;
 }
 
+#search {
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--main-fg-color);
+    margin: 1rem auto;
+    transform: translateY(-60px);
+    transition: transform 222ms;
+    box-shadow: rgba(10,10,10,0.7) 0 0 25px;
+}
+
+#search:focus {
+    transform: translateY(0);
+}
 
 @keyframes gradient-animation {
     0% {

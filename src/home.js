@@ -63,6 +63,16 @@
         }
     });
 
+    window.onload = () => {
+        document.getElementById("search").focus();
+    };
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement.id !== "search") {
+            e.preventDefault();
+            document.getElementById("search").focus();
+        }
+    });
 
     const greeting = qs('#greeting');
     const greetz = [

@@ -10,6 +10,8 @@
         root.style.setProperty('--amount', `-${width + 2}px`);
     }
 
+    const searchField = qs('#search');
+
     // create a random hsl
     const generateRandomNumberBetween30and360 = () => Math.floor(Math.random() * (360 - 30 + 1)) + 30;
 
@@ -38,33 +40,19 @@
 
     const updateBackground =() => {
         const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (isDarkMode) {
-            document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
-            document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
-            document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
-        } else {
-            document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
-            document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
-            document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
-        }
+        document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${isDarkMode ? dark : light})`);
+        document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${isDarkMode ? dark : light})`);
+        document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${isDarkMode ? dark : light})`);
     };
 
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', event => {
-        const newColorScheme = event.matches ? "dark" : "light";
-        console.log(newColorScheme);
-        if (newColorScheme === "dark") {
-            document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
-            document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
-            document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${dark})`);
-        } else {
-            document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
-            document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
-            document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${light})`);
-        }
+        document.body.style.setProperty('--main-bg-color-1', `hsl(${generateRandomNumberBetween30and360()}, ${event.matches ? dark : light})`);
+        document.body.style.setProperty('--main-bg-color-2', `hsl(${generateRandomNumberBetween30and360()}, ${event.matches ? dark : light})`);
+        document.body.style.setProperty('--main-bg-color-3', `hsl(${generateRandomNumberBetween30and360()}, ${event.matches ? dark : light})`);
     });
 
     window.onload = () => {
-        document.getElementById("search").focus();
+        searchField.focus();
     };
 
     document.addEventListener("keydown", (e) => {
@@ -75,9 +63,12 @@
             document.activeElement.id !== "new-calendar-event-date"
         ) {
             e.preventDefault();
-            document.getElementById("search").focus();
+            searchField.focus();
         }
     });
+
+    const hintButton = qs('#hint');
+    hintButton.addEventListener('click', () => searchField.focus())
 
     const greeting = qs('#greeting h1');
     const greetz = [

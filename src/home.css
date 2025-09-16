@@ -1,6 +1,6 @@
 :root {
     --main-fg-color: #ffffff;
-    --main-fg-color-hover: #456bb8;
+    --main-fg-color-hover: rgba(255,255,255,0.7);
     --transition-speed: 500ms;
     --amount: -200px;
     --duration: 80s;

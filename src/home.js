@@ -94,6 +94,7 @@
         'sup dog',
         'supé dogé',
         '¿que pasa?',
+        'how do',
     ];
     let randGr33tz = greetz[Math.floor(Math.random() * greetz.length)];
     greeting.innerText = randGr33tz;
@@ -130,7 +131,7 @@
         const date = new Date(runTimestamp);
         let msg;
         const diff = date.getDay() - dayOfWeek;
-        const beer = document.getElementById('beer');
+        const beer = qs('#beer');
 
 
         const calendarEvents = [
@@ -171,7 +172,7 @@
             const rightNow = new moment();
             return `<li 
                 class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' : ''}" 
-                title="${moment(calendarEvent.date).format('ddd, Do MMMM YYYY')}">
+                title="${moment(calendarEvent.date).format('ddd, Do MMMM YYYY @ h:mm a')}">
                     <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
                         ${calendarEvent.title} ${daysRemaining(calendarEvent.date)}
                     </span>
@@ -532,9 +533,9 @@
 
     addBookmarkDialogForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const emoji = document.getElementById('new-bookmark-emoji');
-        const bookmarkName = document.getElementById('new-bookmark-name');
-        const url = document.getElementById('new-bookmark-url');
+        const emoji = qs('#new-bookmark-emoji');
+        const bookmarkName = qs('#new-bookmark-name');
+        const url = qs('#new-bookmark-url');
 
 
 

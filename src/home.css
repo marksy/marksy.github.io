@@ -113,9 +113,26 @@ a:focus::after {
 .page-wrapper {
     padding: 1rem;
     position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
 
     @media (min-width: 480px) {
         padding: 2rem;
+        justify-content: space-between;
+        flex-direction: row;
+        height: 80vh;
+    }
+}
+
+.column-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+
+    @media (min-width: 480px) {
+        align-items: flex-start;
     }
 }
 
@@ -245,7 +262,7 @@ input {
     font-family: monospace;
     font-size: clamp(1.5rem, 1.3vw, 18rem);
     color: #333;
-    position: absolute;
+    /*position: absolute;*/
     top: 1rem;
     right: 1rem;
 }
@@ -254,7 +271,7 @@ input {
     color: #333;
     font-family: monospace;
     font-size: 2.5rem;
-    position: absolute;
+    /*position: absolute;*/
     top: 2.5rem;
     right: 1rem;
 }
@@ -263,7 +280,7 @@ input {
     color: #333;
     font-family: monospace;
     font-size: 1.5rem;
-    position: absolute;
+    /*position: absolute;*/
     top: 5rem;
     right: 1rem;
 }
@@ -288,16 +305,13 @@ input {
 }
 
 .add-calendar {
-    padding: 1rem;
+    padding: 1rem 0;
     font-family: monospace;
+    align-self: flex-end;
 }
 
 .calendar-count {
     margin-bottom: 1rem;
-
-    @media (min-width: 480px) {
-        margin-bottom: 0;
-    }
 }
 
 .add-calendar input,
@@ -332,18 +346,10 @@ input {
     justify-content: space-between;
 }
 
-.calendar-count {
-    @media (min-width: 480px) {
-        position: absolute;
-        bottom: 5rem;
-        left: 2rem;
-    }
-}
-
 .add-calendar-button-group,
 .add-calendar-event-wrapper {
     @media (min-width: 480px) {
-        position: absolute;
+        /*position: absolute;*/
         bottom: 5rem;
         right: 2rem;
     }
@@ -427,9 +433,11 @@ dialog input {
 .temperature-calculator-wrapper {
     display: flex;
     flex-direction: column;
+    margin-top: auto;
+    width: 100%;
 
     @media (min-width: 480px) {
-        position: absolute;
+        /*position: absolute;*/
         right: 1rem;
         bottom: 0;
     }
@@ -459,7 +467,7 @@ dialog input {
     font-size: 2rem;
 
     @media (min-width: 480px) {
-        position: absolute;
+        /*position: absolute;*/
         bottom: -3rem;
         right: 0;
     }
@@ -477,9 +485,10 @@ dialog input {
 .speed-calculator-wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
 
     @media (min-width: 480px) {
-        position: absolute;
+        /*position: absolute;*/
         right: 1rem;
         bottom: -160px;
     }
@@ -492,7 +501,7 @@ dialog input {
     font-size: 2rem;
 
     @media (min-width: 480px) {
-        position: absolute;
+        /*position: absolute;*/
         bottom: -3rem;
         right: 0;
     }
@@ -537,6 +546,10 @@ fieldset legend {
 .search-form {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    width: 204px;
+    margin: 0 auto;
+    align-items: center;
 }
 
 .hint {

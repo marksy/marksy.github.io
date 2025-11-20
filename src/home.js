@@ -643,7 +643,7 @@
                 speedInput.classList.remove('form-error');
             }
             const returnValue = toUnit === 'mph' ? inputValue * 0.621371 : inputValue / 0.621371;
-            return `${returnValue.toFixed()} mph`;
+            return `${returnValue.toFixed()} ${toUnit}`;
         }
 
         calculateSpeedButton.addEventListener('click', (e) => {

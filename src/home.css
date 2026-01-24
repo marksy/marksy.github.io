@@ -85,7 +85,8 @@ h1 {
 
 p {
     font-size: 1rem;
-    padding: 0.5rem 0.5rem 0;
+    padding: 0.5rem 0.5rem 1rem;
+    margin: 0;
 }
 
 h1, p, fieldset, form {
@@ -97,11 +98,15 @@ a, a:hover {
     color: var(--main-fg-color);
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: color 222ms;
+    transition: color 222ms, background-color 222ms;
+    background-color: rgba(255,255,255,0);
+    padding: 0.5rem 1rem;
+    border-radius: 62.5rem;
 }
 
 a:hover {
     color: var(--main-fg-color-hover);
+    background-color: rgba(255,255,255,0.5);
 }
 
 a:focus::after {

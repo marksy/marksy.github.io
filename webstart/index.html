@@ -32,8 +32,8 @@
                 <h1>Edit bookmarks</h1>
                 <div class="bookmark-contents"></div>
                 <footer>
-                    <button type="button" class="bm-dialog-cancel">Cancel</button>
-                    <button type="button" class="bm-dialog-save">Save</button>
+                    <button type="button" class="btn bm-dialog-cancel">Cancel</button>
+                    <button type="button" class="btn bm-dialog-save">Save</button>
                 </footer>
             </dialog>
             <dialog class="add-bm-dialog">
@@ -53,14 +53,15 @@
                             <input type="url" required id="new-bookmark-url">
                         </label>
                         <footer>
-                            <button type="button" class="add-bm-dialog-cancel">Cancel</button>
-                            <button class="add-bm-dialog-save">Save</button>
+                            <button type="button" class="btn add-bm-dialog-cancel">Cancel</button>
+                            <button class="btn
+                            add-bm-dialog-save">Save</button>
                         </footer>
                     </form>
                 </div>
             </dialog>
             <div class="enable-notifications">
-                <button type="button" id="enable-notifications">Enable notifications</button>
+                <button type="button" class="btn" id="enable-notifications">Enable notifications</button>
             </div>
         </div>
 
@@ -116,14 +117,14 @@
             <div class="add-calendar">
                 <div class="calendar-count"></div>
                 <div class="add-calendar-button-group">
-                    <button type="button" class="edit-calendar-button">Edit events</button>
-                    <button type="button" class="add-calendar-button">Add event</button>
+                    <button type="button" class="btn edit-calendar-button">Edit events</button>
+                    <button type="button" class="btn add-calendar-button">Add event</button>
                 </div>
                 <dialog class="dialog">
                     <h1>Events in local storage</h1>
                     <div class="dialog-events" id="dialog-events"></div>
                     <footer>
-                        <button type="button" class="dialog-cancel">Cancel</button>
+                        <button type="button" class="btn dialog-cancel">Cancel</button>
                     </footer>
                 </dialog>
                 <form id="calendar-form" class="add-calendar-event-wrapper">
@@ -140,8 +141,8 @@
                         <input type="datetime-local" id="new-calendar-event-date">
                     </label>
                     <div class="button-group">
-                        <button type="submit" class="add-calendar-event-wrapper--add">Add</button>
-                        <button type="button" class="add-calendar-event-wrapper--cancel">Cancel</button>
+                        <button type="submit" class="btn add-calendar-event-wrapper--add">Add</button>
+                        <button type="button" class="btn add-calendar-event-wrapper--cancel">Cancel</button>
                     </div>
                 </form>
             </div>

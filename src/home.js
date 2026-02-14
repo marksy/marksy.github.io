@@ -377,7 +377,7 @@
         dialogEvents = JSON.parse(localStorage.getItem('marksyEvents')) || [];
         let html = ``;
         dialogEvents.forEach((item, index) => {
-            html += `<div class="dialog-event"><span class="${moment(item.date).isBefore(new Date()) ? 'strike-through' : ''}">${item.title} - ${item.date}</span> <button type="button" class="delete-event" data-index="${index}">delete</button></div>`;
+            html += `<div class="dialog-event"><span class="${moment(item.date).isBefore(new Date()) ? 'strike-through' : ''}">${item.title} - ${item.date}</span> <button type="button" class="btn delete-event" data-index="${index}">delete</button></div>`;
         });
 
         dialogEventsContainer.innerHTML = html;
@@ -473,24 +473,75 @@
 
     let bookmarkEditHTML = ``;
 
+    // working copy of bookmarks used within the Edit dialog for reordering
+    let workingBookmarks = [];
     let bookmarksToDelete = [];
 
     const renderEditBookmarks = () => {
+        // initialize workingBookmarks on first open or when empty
+        if (workingBookmarks.length === 0) {
+            workingBookmarks = [...getMarksyBookmarks()];
+        }
         bookmarkEditHTML = ``;
-        getMarksyBookmarks().forEach((item) => {
-            bookmarkEditHTML += `<div class="row-item" id="${item.id}">${item.emoji} <span title="${item.url}">${item.title}</span> <button type="button" class="btn delete-event delete-bookmark">delete</button> </div>`
+        workingBookmarks.forEach((item, index) => {
+            const isFirst = index === 0;
+            const isLast = index === workingBookmarks.length - 1;
+            bookmarkEditHTML += `
+                <div class="row-item" id="${item.id}">
+                    ${item.emoji} <span class="title" title="${item.url}">${item.title}</span>
+                    <div class="bm-actions" style="display:inline-flex; gap:.5rem; margin-left:.5rem;">
+                        <button type="button" class="btn bm-move-up" ${isFirst ? 'disabled' : ''} data-index="${index}">↑</button>
+                        <button type="button" class="btn bm-move-down" ${isLast ? 'disabled' : ''} data-index="${index}">↓</button>
+                        <button type="button" class="btn delete-event delete-bookmark">delete</button>
+                    </div>
+                </div>`
         });
         editBookmarkDialogContainer.innerHTML = bookmarkEditHTML;
 
+        // restore strike-through state for any items previously marked for deletion
+        bookmarksToDelete.forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('strike-through', 'dim');
+        });
+
         const deleteBookmarkButton = qa('.delete-bookmark');
-        deleteBookmarkButton.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                if (item.parentElement.classList.contains('strike-through')) {
-                    item.parentElement.classList.remove('strike-through','dim');
-                    bookmarksToDelete.pop(item.parentElement.id);
+        deleteBookmarkButton.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const row = btn.closest('.row-item');
+                const id = row.id;
+                if (row.classList.contains('strike-through')) {
+                    row.classList.remove('strike-through','dim');
+                    // remove id from bookmarksToDelete
+                    bookmarksToDelete = bookmarksToDelete.filter(x => x !== id);
                 } else {
-                    item.parentElement.classList.add('strike-through', 'dim');
-                    bookmarksToDelete.push(item.parentElement.id);
+                    row.classList.add('strike-through', 'dim');
+                    if (!bookmarksToDelete.includes(id)) bookmarksToDelete.push(id);
+                }
+            });
+        });
+
+        // wire up move up/down buttons
+        const moveUpButtons = qa('.bm-move-up');
+        moveUpButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const i = Number(btn.getAttribute('data-index'));
+                if (i > 0) {
+                    const tmp = workingBookmarks[i - 1];
+                    workingBookmarks[i - 1] = workingBookmarks[i];
+                    workingBookmarks[i] = tmp;
+                    renderEditBookmarks();
+                }
+            });
+        });
+        const moveDownButtons = qa('.bm-move-down');
+        moveDownButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const i = Number(btn.getAttribute('data-index'));
+                if (i < workingBookmarks.length - 1) {
+                    const tmp = workingBookmarks[i + 1];
+                    workingBookmarks[i + 1] = workingBookmarks[i];
+                    workingBookmarks[i] = tmp;
+                    renderEditBookmarks();
                 }
             });
         });
@@ -498,23 +549,23 @@
 
     const bmSaveButton = qs('.bm-dialog-save');
     bmSaveButton.addEventListener('click', () => {
-        let newBookmarks = [];
-        getMarksyBookmarks().forEach((bookMarkItem) => {
-            if (!bookmarksToDelete.includes(bookMarkItem.id)) {
-                newBookmarks.push(bookMarkItem);
-            }
-        });
+        // persist the reordered list, excluding items marked for deletion
+        const newBookmarks = workingBookmarks.filter(item => !bookmarksToDelete.includes(item.id));
 
         // save to LS
         localStorage.setItem('marksyBookmarks', JSON.stringify(newBookmarks));
         renderBookmarks();
         bookmarkEditHTML = ``;
+        workingBookmarks = [];
+        bookmarksToDelete = [];
         editBookmarkDialog.close();
     });
 
     const bmCancelButton = qs('.bm-dialog-cancel');
     bmCancelButton.addEventListener('click', () => {
         editBookmarkDialog.close();
+        // reset state so next open reflects current storage
+        workingBookmarks = [];
         bookmarksToDelete = [];
     })
 

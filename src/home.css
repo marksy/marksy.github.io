@@ -114,8 +114,21 @@ a:focus::after {
 }
 
 .btn {
+    padding: 0.5rem 0.75rem;
     border: unset;
     border-radius: unset;
+    border: 1px solid rgba(232, 232, 232, 0.2);
+    background-color: rgba(220, 220, 220, 0.2);
+    color: black;
+}
+
+.btn:hover:not(:disabled) {
+    border: 1px solid rgba(232, 232, 232, 0.6);
+    background-color: rgba(220, 220, 220, 0.4);
+}
+
+.btn:disabled {
+    opacity: 0.1;
 }
 
 .page-wrapper {
@@ -322,8 +335,7 @@ input {
     margin-bottom: 1rem;
 }
 
-.add-calendar input,
-.add-calendar button {
+.add-calendar input {
     border: unset;
     border-radius: unset;
 }
@@ -334,9 +346,13 @@ input {
     color: black;
 }
 
-.delete-event:hover {
+.btn.delete-event:hover {
     border: 1px solid rgba(255,0,0,0.6);
     background-color: rgba(255,0,0,0.4);
+}
+
+dialog input {
+    border: 1px solid;
 }
 
 .dialog-cancel {
@@ -407,13 +423,19 @@ dialog input {
 
 .row-item {
     display: flex;
+    justify-content: space-between;
     width: 100%;
+    min-width: 300px;
     align-items: center;
     margin-bottom: 0.5rem;
 }
 
 .row-item span {
     margin-left: 0.5rem;
+}
+
+.row-item .title {
+    margin-right: auto;
 }
 
 .row-item .delete-event {

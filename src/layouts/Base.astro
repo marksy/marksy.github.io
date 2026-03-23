@@ -18,6 +18,20 @@ const siteName = 'marksy.com';
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
     <title>{title === siteName ? title : `${title} | ${siteName}`}</title>
+    <script is:inline>
+      const getThemePreference = () => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        return 'system';
+      };
+
+      const theme = getThemePreference();
+      const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      
+      document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-preference', theme);
+    </script>
   </head>
   <body>
     <header>
@@ -29,6 +43,11 @@ const siteName = 'marksy.com';
         <nav>
           <a href={import.meta.env.BASE_URL}>posts</a>
           <a href={`${import.meta.env.BASE_URL}about`}>about</a>
+          <button id="theme-toggle" aria-label="Toggle theme">
+            <span class="sun">☀️</span>
+            <span class="moon">🌙</span>
+            <span class="system">🖥️</span>
+          </button>
         </nav>
       </div>
     </header>
@@ -43,5 +62,47 @@ const siteName = 'marksy.com';
         <a href="https://github.com/marksy" target="_blank" rel="noopener">github</a>
       </div>
     </footer>
+    <script>
+      const getThemePreference = () => localStorage.getItem('theme') || 'system';
+
+      const applyTheme = (theme) => {
+        const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-preference', theme);
+      };
+
+      const toggleTheme = () => {
+        const current = getThemePreference();
+        let next;
+        if (current === 'system') next = 'light';
+        else if (current === 'light') next = 'dark';
+        else next = 'system';
+        
+        localStorage.setItem('theme', next);
+        applyTheme(next);
+      };
+
+      // Initial apply
+      applyTheme(getThemePreference());
+
+      // Setup listeners
+      const setup = () => {
+        const btn = document.getElementById('theme-toggle');
+        btn?.addEventListener('click', toggleTheme);
+      };
+
+      setup();
+
+      // Handle system theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (getThemePreference() === 'system') {
+          applyTheme('system');
+        }
+      });
+
+      // Listen for Astro page navigations
+      document.addEventListener('astro:after-swap', () => applyTheme(getThemePreference()));
+      document.addEventListener('astro:page-load', setup);
+    </script>
   </body>
 </html>

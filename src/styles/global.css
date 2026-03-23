@@ -1,0 +1,297 @@
+/* ─── Fonts ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500&display=swap');
+
+/* ─── Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg:        #0e0f11;
+  --bg-2:      #16181c;
+  --bg-3:      #1e2128;
+  --border:    #2a2d36;
+  --text:      #e2e4e9;
+  --muted:     #6b7280;
+  --accent:    #7ee8a2;   /* terminal green */
+  --accent-2:  #5bc4fe;   /* sky blue */
+  --danger:    #f87171;
+  --mono:      'IBM Plex Mono', monospace;
+  --sans:      'IBM Plex Sans', system-ui, sans-serif;
+  --max:       680px;
+  --radius:    4px;
+}
+
+/* ─── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.7;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+body { min-height: 100vh; }
+
+/* ─── Typography ─────────────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--mono);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text);
+}
+
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.3rem;  margin-top: 2.5rem; margin-bottom: .75rem; }
+h3 { font-size: 1.05rem; margin-top: 2rem;   margin-bottom: .5rem; }
+
+p  { margin-bottom: 1.25rem; color: #c8cad0; }
+a  { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+strong { font-weight: 600; color: var(--text); }
+em     { font-style: italic; }
+
+/* ─── Code ───────────────────────────────────────────────── */
+code {
+  font-family: var(--mono);
+  font-size: .875em;
+  background: var(--bg-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: .1em .35em;
+  color: var(--accent-2);
+}
+
+pre {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--text);
+  font-size: .85rem;
+}
+
+/* ─── Prose extras ───────────────────────────────────────── */
+blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 1.5rem 0;
+  padding: .75rem 1.25rem;
+  background: var(--bg-2);
+  color: var(--muted);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+ul, ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  color: #c8cad0;
+}
+
+li { margin-bottom: .35rem; }
+
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
+}
+
+img {
+  max-width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+/* ─── Layout ─────────────────────────────────────────────── */
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+header {
+  border-bottom: 1px solid var(--border);
+  padding: 1.25rem 0;
+  position: sticky;
+  top: 0;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(10px);
+  z-index: 10;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-logo {
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+}
+
+.site-logo .prompt { color: var(--accent); }
+
+nav { display: flex; gap: 1.5rem; }
+nav a {
+  font-size: .85rem;
+  color: var(--muted);
+  font-family: var(--mono);
+}
+nav a:hover { color: var(--accent); text-decoration: none; }
+
+/* ─── Footer ─────────────────────────────────────────────── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 0;
+  margin-top: 5rem;
+  color: var(--muted);
+  font-size: .8rem;
+  font-family: var(--mono);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+/* ─── Tag chip ───────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  font-size: .72rem;
+  font-family: var(--mono);
+  color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: var(--radius);
+  padding: .1em .55em;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+
+/* ─── Post card ──────────────────────────────────────────── */
+.post-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color .15s, background .15s;
+  text-decoration: none;
+  display: block;
+  background: var(--bg-2);
+}
+
+.post-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-3);
+  text-decoration: none;
+}
+
+.post-card-date {
+  font-size: .75rem;
+  color: var(--muted);
+  margin-bottom: .4rem;
+}
+
+.post-card-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: .5rem;
+}
+
+.post-card-desc {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-bottom: .75rem;
+}
+
+.post-card-tags { display: flex; gap: .4rem; flex-wrap: wrap; }
+
+/* ─── Post list grid ─────────────────────────────────────── */
+.posts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  margin-top: 2rem;
+}
+
+/* ─── Article prose ──────────────────────────────────────── */
+.prose {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.prose h2::before { content: '## '; color: var(--muted); }
+.prose h3::before { content: '### '; color: var(--muted); }
+
+/* ─── Post header ────────────────────────────────────────── */
+.post-header {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: .75rem;
+  flex-wrap: wrap;
+}
+
+.post-meta-date { font-size: .8rem; color: var(--muted); }
+.post-meta-tags { display: flex; gap: .4rem; }
+
+/* ─── Cursor blink ───────────────────────────────────────── */
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+.cursor {
+  display: inline-block;
+  width: .6ch;
+  height: 1em;
+  background: var(--accent);
+  animation: blink 1s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+/* ─── Hero ───────────────────────────────────────────────── */
+.hero {
+  padding: 4rem 0 3rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+
+.hero-eyebrow {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-bottom: .75rem;
+  letter-spacing: .05em;
+}
+
+.hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  margin-bottom: 1rem;
+}
+
+.hero-desc {
+  font-size: .95rem;
+  color: var(--muted);
+  margin-bottom: 0;
+}

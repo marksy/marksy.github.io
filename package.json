@@ -4,14 +4,18 @@
   "description": "",
   "main": "home.js",
   "scripts": {
-    "build:js": "uglifyjs './src/home.js' --compress --mangle --output './webstart/home.min.js'",
-    "build:css": "uglifycss './src/home.css' --output './webstart/home.min.css' && uglifycss './src/darkmode.css' --output './webstart/darkmode.min.css'",
-    "build": "yarn build:js && yarn build:css",
-    "dev": "yarn http-server ./webstart"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "build:js": "uglifyjs 'webstart/src/home.js' --compress --mangle --output './webstart/home.min.js'",
+    "build:css": "uglifycss 'webstart/src/home.css' --output './webstart/home.min.css' && uglifycss './src/darkmode.css' --output './webstart/darkmode.min.css'",
+    "build:webstart": "yarn build:js && yarn build:css",
+    "dev:webstart": "yarn http-server ./webstart"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "astro": "^6.0.8",
     "http-server": "^14.1.1",
     "uglify-js": "^3.19.3",
     "uglifycss": "^0.0.29"

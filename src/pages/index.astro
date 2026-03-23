@@ -21,11 +21,35 @@ const fmt = (d: Date) =>
 <Base title="marksy.com">
   <div class="container">
     <div class="hero">
-      <h1>mark chambers<span class="cursor"></span></h1>
+      <h1 id="hero-heading">mark chambers<span class="cursor" id="hero-cursor"></span></h1>
       <p class="hero-desc">
         Notes on software, systems, and whatever else I'm building.
       </p>
     </div>
+
+    <script>
+      const heading = document.getElementById('hero-heading');
+      const originalText = "mark chambers";
+      const easterEggText = "matt james";
+
+      if (heading) {
+        heading.addEventListener('click', (e) => {
+          if (e.metaKey) {
+            heading.firstChild.textContent = easterEggText;
+          }
+        });
+
+        window.addEventListener('keyup', (e) => {
+          if (e.key === 'Meta') {
+            heading.firstChild.textContent = originalText;
+          }
+        });
+
+        window.addEventListener('blur', () => {
+          heading.firstChild.textContent = originalText;
+        });
+      }
+    </script>
 
     <div class="posts-grid">
       {sorted.map(post => (

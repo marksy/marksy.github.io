@@ -17,6 +17,7 @@
   --bg-3:      #1e2128;
   --border:    #2a2d36;
   --text:      #e2e4e9;
+  --text-inverted: #111827;
   --muted:     #6b7280;
   --text-p:    #c8cad0;
   --accent:    #7ee8a2;   /* terminal green */
@@ -31,6 +32,7 @@
   --bg-3:      #f3f4f6;
   --border:    #e5e7eb;
   --text:      #111827;
+  --text-inverted: #e2e4e9;
   --muted:     #6b7280;
   --text-p:    #374151;
   --accent: #18bc4f;   /* terminal green */
@@ -70,6 +72,35 @@ a:hover { text-decoration: underline; }
 
 strong { font-weight: 600; color: var(--text); }
 em     { font-style: italic; }
+
+/* ─── Table ─────────────────────────────────────────── */
+table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 100%;
+  margin: 1rem 0;
+  border-collapse: collapse;
+
+  th,td {
+    padding: 0.5rem;
+  }
+
+  thead {
+    text-align: left;
+
+    th {
+      background: var(--muted);
+      color: var(--text-inverted);
+      border-bottom: 1px solid var(--border);
+    }
+  }
+
+  tbody {
+    tr:not(:last-of-type) td {
+      border-bottom: 1px solid var(--border);
+    }
+  }
+}
 
 /* ─── Code ───────────────────────────────────────────────── */
 code {
@@ -125,6 +156,7 @@ hr {
 
 img {
   max-width: 100%;
+  height: auto;
   border-radius: var(--radius);
   border: 1px solid var(--border);
 }

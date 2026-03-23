@@ -7,6 +7,8 @@ tags: ["brewing"]
 
 I'm currently brewing a beer, as it was sunny today, I had a day off from work and some ingredients to brew with.
 
+![My Beer](end-of-days-ipa.jpeg)
+
 ## Why "End of Days"
 
 - It's coming up to the end of Summer in New Zealand

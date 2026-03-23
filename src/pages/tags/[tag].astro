@@ -1,11 +1,23 @@
 ---
-import Base from '../layouts/Base.astro';
+import Base from '../../layouts/Base.astro';
 import { getCollection } from 'astro:content';
 
-// Fetch every .md file inside src/content/blog/
-const posts = await getCollection('blog');
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  const tags = [...new Set(posts.flatMap(p => p.data.tags || []))].filter(Boolean);
+  
+  return tags.map(tag => ({
+    params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+    props: { 
+      tagName: tag,
+      posts: posts.filter(p => p.data.tags?.some(t => t.toLowerCase() === tag.toLowerCase())) 
+    },
+  }));
+}
 
-// Sort by date descending
+const { tag } = Astro.params;
+const { posts, tagName } = Astro.props;
+
 const sorted = posts
   .map(p => ({
     url: `${import.meta.env.BASE_URL}blog/${p.id}`,
@@ -18,13 +30,14 @@ const fmt = (d: Date) =>
   d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
 
-<Base title="marksy.com">
+<Base title={`Posts tagged with "${tagName}"`}>
   <div class="container">
     <div class="hero">
-      <h1>mark chambers<span class="cursor"></span></h1>
+      <h1>tag: <span class="tag-label">{tagName}</span></h1>
       <p class="hero-desc">
-        Notes on software, systems, and whatever else I'm building.
+        {sorted.length} {sorted.length === 1 ? 'post' : 'posts'} tagged with "{tagName}".
       </p>
+      <a href={import.meta.env.BASE_URL} class="back-link">← all posts</a>
     </div>
 
     <div class="posts-grid">
@@ -47,3 +60,19 @@ const fmt = (d: Date) =>
     </div>
   </div>
 </Base>
+
+<style>
+  .tag-label {
+    color: var(--accent);
+  }
+  .back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .back-link:hover {
+    color: var(--accent);
+  }
+</style>

@@ -185,6 +185,25 @@ footer {
   background: color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
+.tag:hover {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  text-decoration: none;
+}
+
+.post-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+
+.post-meta-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
 /* ─── Post card ──────────────────────────────────────────── */
 .post-card {
   border: 1px solid var(--border);
@@ -209,10 +228,17 @@ footer {
 }
 
 .post-card-title {
+  display: block;
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text);
   margin-bottom: .5rem;
+  text-decoration: none;
+}
+
+.post-card-title:hover {
+  color: var(--accent);
+  text-decoration: underline;
 }
 
 .post-card-desc {

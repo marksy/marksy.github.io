@@ -123,7 +123,7 @@ Once all the boil and hop-stand hops were complete, I set the emersion chiller d
 
 It took over an hour to cool down to about 36˚c, by that time I had santised the fermenter and used a santised strainer to help with filtering out any clumps of hops or protein.
 
-Still to hot to pitch the yeast, I put the fermenter into the fridge and set the temperature to 17.6
+Still too hot to pitch the yeast, I put the fermenter into the fridge and set the temperature to 17.6
 
 I want a temperature of around 19˚c so keeping it lower is safer than directly setting it to 19˚c where it could make the yeast go crazy and splurt out flavours that aren't nice.
 

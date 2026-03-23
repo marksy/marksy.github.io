@@ -1,8 +1,8 @@
 ---
 title: This post is from iOS
-description: 
+description: I created a swift app
 pubDate: 2026-03-24
-tags: //["test"]
+tags: ["swift", “iOS”]
 ---
 
-Write your post here...
+Testing from iOS

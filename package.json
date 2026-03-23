@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "build:js": "uglifyjs 'webstart/src/home.js' --compress --mangle --output './webstart/home.min.js'",
-    "build:css": "uglifycss 'webstart/src/home.css' --output './webstart/home.min.css' && uglifycss './src/darkmode.css' --output './webstart/darkmode.min.css'",
+    "build:css": "uglifycss 'webstart/src/home.css' --output './webstart/home.min.css' && uglifycss './webstart/src/darkmode.css' --output './webstart/darkmode.min.css'",
     "build:webstart": "yarn build:js && yarn build:css",
     "dev:webstart": "yarn http-server ./webstart"
   },

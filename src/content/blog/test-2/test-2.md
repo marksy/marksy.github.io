@@ -1,9 +1,9 @@
 ---
 title: Test 2
-description: 
+description: des 
 pubDate: 2026-06-11
 heroImage: /images/test-2.jpg
-tags: //["test"]
+tags: ["test"]
 ---
 
 ![Hero image](/images/test-2.jpg)

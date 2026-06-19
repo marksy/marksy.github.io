@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "astro": "^6.0.8",
+    "astro": "6.4.8",
     "http-server": "^14.1.1",
     "uglify-js": "^3.19.3",
     "uglifycss": "^0.0.29"

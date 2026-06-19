@@ -148,6 +148,10 @@ ul, ol {
 
 li { margin-bottom: .35rem; }
 
+li ul, li ol {
+  margin-bottom: 0;
+}
+
 hr {
   border: none;
   border-top: 1px solid var(--border);
@@ -343,14 +347,15 @@ footer {
   margin: 0 auto;
 }
 
-.prose h2::before { content: '## '; color: var(--muted); }
-.prose h3::before { content: '### '; color: var(--muted); }
+.prose h2::before { color: var(--muted); }
+.prose h3::before { color: var(--muted); }
 
 /* ─── Post header ────────────────────────────────────────── */
 .post-header {
   padding: 3rem 0 2rem;
   border-bottom: 1px solid var(--border);
   margin-bottom: 2.5rem;
+  position: relative;
 }
 
 .post-meta {

@@ -55,6 +55,10 @@ It took about 38 hours in total from Wellington to Sofia.
   - decent-sized screen
 - other people were well-behaved
 
+## Would I fly Turkish again?
+
+They wouldn't be a first choice, but I'd consider them again if the price was really good.
+
 ## Istanbul airport 
 
 ![Istanbul Internation Airport, where high fliers pay high prices!](istanbul.jpeg)
@@ -118,7 +122,3 @@ It wouldn't be Bulgaria without potholes.
 The right-hand lane is often riddled with potholes (probably because of the many trucks), and the left-hand (overtaking) lane is full of black Mercedes & BMW that just need to be in front.
 
 Doing north of 100 kmph and hitting a pothole is certainly an event to wake anyone sleeping.
-
-## Would I fly Turkish again?
-
-They wouldn't be a first choice, but I'd consider them again if the price was really good.

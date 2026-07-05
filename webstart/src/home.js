@@ -65,6 +65,13 @@
             e.preventDefault();
             searchField.focus();
         }
+
+        if (e.ctrlKey && e.key >= '0' && e.key <= '9') {
+            e.preventDefault();
+            const bookmarks = getMarksyBookmarks();
+            const getBookmark = bookmarks[Number(e.key) - 1];
+            location.href = getBookmark.url;
+        }
     });
 
     const hintButton = qs('#hint');
@@ -129,7 +136,6 @@
     const beerOclock = (beerDay) => {
         const dayOfWeek = beerDay || 5;
         const date = new Date(runTimestamp);
-        let msg;
         const diff = date.getDay() - dayOfWeek;
         const beer = qs('#beer');
 
@@ -451,7 +457,7 @@
         if (getMarksyBookmarks().length === 0) {
             bookmarkHTML = `<p>No bookmarks found. <button type="button" class="load-bookmarks">Load defaults</button> </p>`;
         } else {
-            getMarksyBookmarks().forEach((item, index) => {
+            getMarksyBookmarks().forEach((item) => {
                 bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title}</a></p>`
             });
         }
@@ -664,7 +670,7 @@
         calculatedTemperatureValueDiv.innerText = convertedTemperatureValue;
     });
 
-    temperatureInput.addEventListener("keyup", (event) => {
+    temperatureInput.addEventListener("keyup", () => {
         clearTemperatureInputButton.disabled = temperatureInput.value.length <= 0
         calculateTemperatureButton.disabled = temperatureInput.value.length <= 0
     });
@@ -709,7 +715,7 @@
             calculatedSpeedValueDiv.innerText = convertedSpeedValue;
         });
 
-        speedInput.addEventListener("keyup", (event) => {
+        speedInput.addEventListener("keyup", () => {
             clearSpeedInputButton.disabled = speedInput.value.length <= 0
             calculateSpeedButton.disabled = speedInput.value.length <= 0
         });

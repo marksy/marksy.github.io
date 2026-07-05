@@ -69,6 +69,14 @@
         if (e.ctrlKey && e.key >= '0' && e.key <= '9') {
             e.preventDefault();
             const bookmarks = getMarksyBookmarks();
+            if (Number(e.key) > bookmarks.length || (Number(e.key) === 0) && bookmarks.length < 10) {
+                return;
+            }
+            if (e.key === '0' && bookmarks.length >= 10) {
+                const getBookmark = bookmarks[9]; // tenth item in 0-based array
+                location.href = getBookmark.url;
+                return;
+            }
             const getBookmark = bookmarks[Number(e.key) - 1];
             location.href = getBookmark.url;
         }
@@ -457,8 +465,8 @@
         if (getMarksyBookmarks().length === 0) {
             bookmarkHTML = `<p>No bookmarks found. <button type="button" class="load-bookmarks">Load defaults</button> </p>`;
         } else {
-            getMarksyBookmarks().forEach((item) => {
-                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title}</a></p>`
+            getMarksyBookmarks().forEach((item, index) => {
+                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title} (^ + ${index + 1})</a></p>`
             });
         }
 

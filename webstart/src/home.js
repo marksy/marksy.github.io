@@ -66,6 +66,11 @@
             searchField.focus();
         }
 
+        if (e.key === 'Control') {
+            const body = qs('body');
+            body.classList.add('ctrl-down');
+        }
+
         if (e.ctrlKey && e.key >= '0' && e.key <= '9') {
             e.preventDefault();
             const bookmarks = getMarksyBookmarks();
@@ -81,6 +86,13 @@
             location.href = getBookmark.url;
         }
     });
+
+    document.addEventListener("keyup", (e) => {
+        if (e.key === 'Control') {
+            const body = qs('body');
+            body.classList.remove('ctrl-down');
+        }
+    })
 
     const hintButton = qs('#hint');
     hintButton.addEventListener('click', () => searchField.focus())
@@ -466,7 +478,7 @@
             bookmarkHTML = `<p>No bookmarks found. <button type="button" class="load-bookmarks">Load defaults</button> </p>`;
         } else {
             getMarksyBookmarks().forEach((item, index) => {
-                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title} ${index <= 9 ? `(^ + ${index === 9 ? '0' : index + 1})` : ''}</a></p>`
+                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title} ${index <= 9 ? `<span class="ctrl-helper">(^ + ${index === 9 ? '0' : index + 1})</span>` : ''}</a></p>`
             });
         }
 

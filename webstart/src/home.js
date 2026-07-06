@@ -739,3 +739,5 @@
     })();
 
 })(window.JSConfetti, window.moment, window._);
+
+// touch

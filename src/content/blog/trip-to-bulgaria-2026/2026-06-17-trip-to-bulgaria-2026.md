@@ -103,7 +103,7 @@ They wouldn't be a first choice, but I'd consider them again if the price was re
     - 120km/h on expressways with green signs  
     - 90km/h on national roads (roads outside of towns)
     - 50-30km/h in towns
-    - when you have to slow down for roadworks or intersection, you can speed back up to resume the speed as soon as you pass it (e.g., no speeds that tell you to resume)
+    - when you have to slow down for roadworks or intersection, you can speed back up to resume the speed as soon as you pass it (e.g., no speed signs that tell you to resume)
 - **HOT TIP:** use [Waze](https://www.waze.com) for navigating as it has up-to-date road speeds, as well as user-submitted pothole and cop locations
 - motorway interchanges are _so_ dangerous.
 

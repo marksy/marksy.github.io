@@ -51,7 +51,7 @@ It took about 38 hours in total from Wellington to Sofia.
 ### The good
 
 - the in-flight entertainment system worked well
-  - bluetooth audio
+  - Bluetooth audio
   - decent-sized screen
 - other people were well-behaved
 
@@ -98,12 +98,14 @@ They wouldn't be a first choice, but I'd consider them again if the price was re
 - The Bulgarian speed limits are confusing for non-residents. Bulgarian people I've talked to have said different things:
   - 130km/h on most roads, just slow down to 50km/h for towns
   - 120km/h on motorways, 112km/h on back roads, 50km/h near or in towns
-  - I've just looked this up and it seems to be:
+  - I've just looked this up, and it seems to be:
     - 140km/h on motorways with blue signs (such as Trakia motorway A1)
     - 120km/h on expressways with green signs  
     - 90km/h on national roads (roads outside of towns)
+    - 50-30km/h in towns
     - when you have to slow down for roadworks or intersection, you can speed back up to resume the speed as soon as you pass it (e.g., no speeds that tell you to resume)
-- motorway interchanges are so dangerous.
+- **HOT TIP:** use [Waze](https://www.waze.com) for navigating as it has up-to-date road speeds, as well as user-submitted pothole and cop locations
+- motorway interchanges are _so_ dangerous.
 
 ### Example of motorway interchange
 
@@ -119,6 +121,6 @@ What could possibly go wrong here, smdh:
 
 It wouldn't be Bulgaria without potholes.
 
-The right-hand lane is often riddled with potholes (probably because of the many trucks), and the left-hand (overtaking) lane is full of black Mercedes & BMW that just need to be in front.
+The right-hand lane is often riddled with potholes (probably because of the many trucks), and the left-hand (overtaking) lane is full of black Mercedes & BMW that just _need_ to be in front.
 
-Doing north of 100 kmph and hitting a pothole is certainly an event to wake anyone sleeping.
+Doing north of 100 km/h and hitting a pothole is certainly an event to wake anyone sleeping.

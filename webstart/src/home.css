@@ -2,7 +2,6 @@
     --main-fg-color: #ffffff;
     --main-fg-color-hover: rgba(255,255,255,0.7);
     --transition-speed: 500ms;
-    --amount: -200px;
     --duration: 80s;
 }
 
@@ -23,22 +22,22 @@
 }
 
 @media (prefers-color-scheme: dark) {
-        @property --main-bg-color-1 {
-            syntax: '<color>';
-            initial-value: #324876;
-            inherits: false;
-        }
-        @property --main-bg-color-2 {
-            syntax: '<color>';
-            initial-value: #50199b;
-            inherits: false;
-        }
-        @property --main-bg-color-3 {
-            syntax: '<color>';
-            initial-value: #870b45;
-            inherits: false;
-        }
-        --main-fg-color: #95b7bd;
+    @property --main-bg-color-1 {
+        syntax: '<color>';
+        initial-value: #324876;
+        inherits: false;
+    }
+    @property --main-bg-color-2 {
+        syntax: '<color>';
+        initial-value: #50199b;
+        inherits: false;
+    }
+    @property --main-bg-color-3 {
+        syntax: '<color>';
+        initial-value: #870b45;
+        inherits: false;
+    }
+    --main-fg-color: #95b7bd;
 }
 
 @keyframes blinker {
@@ -61,7 +60,7 @@
         transform: translateX(0);
     }
     100% {
-        transform: translateX(var(--amount));
+        transform: translateX(-50%);
     }
 }
 
@@ -109,12 +108,7 @@ a:hover {
     background-color: rgba(255,255,255,0.5);
 }
 
-a:focus-visible {
-    outline: none;
-    border: 1px solid white;
-}
-
-a:focus-visible::after {
+a:focus::after {
     content: ' 🦆';
 }
 
@@ -176,39 +170,12 @@ a:focus-visible::after {
 }
 
 .links {
-    padding: 1rem 0;
     max-height: 60vh;
     overflow: auto;
 }
 
-.links p {
-    padding: 0;
-    margin: 0 0 1rem 0;
-}
-
 .links a {
-    display: inline-block;
-    border: 1px solid transparent;
     text-decoration: none;
-}
-
-.links a:focus-visible {
-    border: 1px solid white;
-}
-
-.ctrl-helper {
-    display: inline-block;
-    max-width: 0;
-    opacity: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    vertical-align: bottom; /* keeps baseline alignment sane with inline-block */
-    transition: opacity 200ms, max-width 200ms;
-}
-
-.ctrl-down .ctrl-helper {
-    max-width: 100px; /* just needs to be bigger than the rendered content */
-    opacity: 1;
 }
 
 label {
@@ -264,6 +231,8 @@ input {
 }
 
 .wrapper {
+    display: flex;
+    width: max-content;
     animation: scroll var(--duration) linear infinite;
     white-space: nowrap;
     will-change: transform;
@@ -290,21 +259,30 @@ input {
 } */
 
 .beer ul {
+    display: flex;          /* removes inline-block whitespace gaps between li's */
+    min-width: 100vw;       /* each copy spans at least the full visible track */
     list-style: none;
     padding: 0;
     margin: 0;
     min-height: 30px;
-    display: inline-block;
     white-space: nowrap;
 }
+
 
 .beer li {
     font-family: monospace;
     list-style: none;
     padding: 0;
     margin: 0 48px 0 0;
-    display: inline-block;
-    width: 400px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 400px;
+}
+
+.beer li:last-of-type {
+    margin-right: 0;
 }
 
 .beer li.display-none {
@@ -329,6 +307,15 @@ input {
     right: 1rem;
 }
 
+#us-time {
+    color: #333;
+    font-family: monospace;
+    font-size: 1.5rem;
+    /*position: absolute;*/
+    top: 5rem;
+    right: 1rem;
+}
+
 .blink {
     animation: blinker 1s linear infinite;
 }
@@ -345,8 +332,6 @@ input {
     #time {
         color: rgba(255,255,255,0.7);
         background-color: rgba(0,0,0,0.3);
-        border-radius: 0.5rem;
-        padding: 0.5rem 1rem;
     }
 }
 
@@ -398,6 +383,7 @@ dialog input {
 .add-calendar-button-group,
 .add-calendar-event-wrapper {
     @media (min-width: 480px) {
+        /*position: absolute;*/
         bottom: 5rem;
         right: 2rem;
     }
@@ -491,6 +477,7 @@ dialog input {
     width: 100%;
 
     @media (min-width: 480px) {
+        /*position: absolute;*/
         right: 1rem;
         bottom: 0;
     }
@@ -520,6 +507,7 @@ dialog input {
     font-size: 2rem;
 
     @media (min-width: 480px) {
+        /*position: absolute;*/
         bottom: -3rem;
         right: 0;
     }
@@ -540,6 +528,7 @@ dialog input {
     width: 100%;
 
     @media (min-width: 480px) {
+        /*position: absolute;*/
         right: 1rem;
         bottom: -160px;
     }
@@ -552,6 +541,7 @@ dialog input {
     font-size: 2rem;
 
     @media (min-width: 480px) {
+        /*position: absolute;*/
         bottom: -3rem;
         right: 0;
     }

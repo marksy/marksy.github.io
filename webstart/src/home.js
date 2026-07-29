@@ -3,13 +3,6 @@
     const qs = (s) => document.querySelector(s);
     const qa = (s) => document.querySelectorAll(s);
 
-    const calcWidth = ()=> {
-        const root = qs(':root');
-        const el = qs('#beer .wrapper ul');
-        const width = el.offsetWidth;
-        root.style.setProperty('--amount', `-${width + 2}px`);
-    }
-
     const searchField = qs('#search');
 
     // create a random hsl
@@ -65,34 +58,7 @@
             e.preventDefault();
             searchField.focus();
         }
-
-        if (e.key === 'Control') {
-            const body = qs('body');
-            body.classList.add('ctrl-down');
-        }
-
-        if (e.ctrlKey && e.key >= '0' && e.key <= '9') {
-            e.preventDefault();
-            const bookmarks = getMarksyBookmarks();
-            if (Number(e.key) > bookmarks.length || (Number(e.key) === 0) && bookmarks.length < 10) {
-                return;
-            }
-            if (e.key === '0' && bookmarks.length >= 10) {
-                const getBookmark = bookmarks[9]; // tenth item in 0-based array
-                location.href = getBookmark.url;
-                return;
-            }
-            const getBookmark = bookmarks[Number(e.key) - 1];
-            location.href = getBookmark.url;
-        }
     });
-
-    document.addEventListener("keyup", (e) => {
-        if (e.key === 'Control') {
-            const body = qs('body');
-            body.classList.remove('ctrl-down');
-        }
-    })
 
     const hintButton = qs('#hint');
     hintButton.addEventListener('click', () => searchField.focus())
@@ -156,6 +122,7 @@
     const beerOclock = (beerDay) => {
         const dayOfWeek = beerDay || 5;
         const date = new Date(runTimestamp);
+        let msg;
         const diff = date.getDay() - dayOfWeek;
         const beer = qs('#beer');
 
@@ -219,8 +186,6 @@
 
         beerDate = date
 
-        calcWidth();
-
         return false;
     }
 
@@ -252,6 +217,7 @@
     ]
 
     const timeBox = qs('#time');
+    const usTimeBox = qs('#us-time');
     const dateBox = qs('#date');
 
     const setTime = () => {
@@ -261,10 +227,19 @@
             hour: '2-digit',
             minute: '2-digit',
         });
+        const centralTime = new Date().toLocaleString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: 'America/Chicago'
+        });
 
         let text = withPmAm.replace(':', '<span class="blink">:</span>')
         text.startsWith('0') ? text = text.substring(1) : text
         timeBox.innerHTML = text
+
+        let usText = centralTime.replace(':', '<span class="blink">:</span>')
+        usText.startsWith('0') ? usText = usText.substring(1) : usText
+        usTimeBox.innerHTML = `🌎 ${usText}`
 
         dateBox.innerHTML = `${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}`
 
@@ -468,7 +443,7 @@
             bookmarkHTML = `<p>No bookmarks found. <button type="button" class="load-bookmarks">Load defaults</button> </p>`;
         } else {
             getMarksyBookmarks().forEach((item, index) => {
-                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title} ${index <= 9 ? `<span class="ctrl-helper">(^ + ${index === 9 ? '0' : index + 1})</span>` : ''}</a></p>`
+                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title}</a></p>`
             });
         }
 
@@ -680,7 +655,7 @@
         calculatedTemperatureValueDiv.innerText = convertedTemperatureValue;
     });
 
-    temperatureInput.addEventListener("keyup", () => {
+    temperatureInput.addEventListener("keyup", (event) => {
         clearTemperatureInputButton.disabled = temperatureInput.value.length <= 0
         calculateTemperatureButton.disabled = temperatureInput.value.length <= 0
     });
@@ -725,7 +700,7 @@
             calculatedSpeedValueDiv.innerText = convertedSpeedValue;
         });
 
-        speedInput.addEventListener("keyup", () => {
+        speedInput.addEventListener("keyup", (event) => {
             clearSpeedInputButton.disabled = speedInput.value.length <= 0
             calculateSpeedButton.disabled = speedInput.value.length <= 0
         });
@@ -741,5 +716,3 @@
     })();
 
 })(window.JSConfetti, window.moment, window._);
-
-// touch

@@ -3,13 +3,6 @@
     const qs = (s) => document.querySelector(s);
     const qa = (s) => document.querySelectorAll(s);
 
-    const calcWidth = ()=> {
-        const root = qs(':root');
-        const el = qs('#beer .wrapper ul');
-        const width = el.offsetWidth;
-        root.style.setProperty('--amount', `-${width + 2}px`);
-    }
-
     const searchField = qs('#search');
 
     // create a random hsl
@@ -192,8 +185,6 @@
         `;
 
         beerDate = date
-
-        calcWidth();
 
         return false;
     }

@@ -2,7 +2,6 @@
     --main-fg-color: #ffffff;
     --main-fg-color-hover: rgba(255,255,255,0.7);
     --transition-speed: 500ms;
-    --amount: -200px;
     --duration: 80s;
 }
 
@@ -61,7 +60,7 @@
         transform: translateX(0);
     }
     100% {
-        transform: translateX(var(--amount));
+        transform: translateX(-50%);
     }
 }
 
@@ -232,6 +231,8 @@ input {
 }
 
 .wrapper {
+    display: flex;
+    width: max-content;
     animation: scroll var(--duration) linear infinite;
     white-space: nowrap;
     will-change: transform;
@@ -258,21 +259,30 @@ input {
 } */
 
 .beer ul {
+    display: flex;          /* removes inline-block whitespace gaps between li's */
+    min-width: 100vw;       /* each copy spans at least the full visible track */
     list-style: none;
     padding: 0;
     margin: 0;
     min-height: 30px;
-    display: inline-block;
     white-space: nowrap;
 }
+
 
 .beer li {
     font-family: monospace;
     list-style: none;
     padding: 0;
     margin: 0 48px 0 0;
-    display: inline-block;
-    width: 400px;
+    display: inline-flex;
+    align-items: center;
+    justify-content center;
+    gap: 0.5rem;
+    min-width: 400px;
+}
+
+.beer li:last-of-type {
+    margin-right: 0;
 }
 
 .beer li.display-none {

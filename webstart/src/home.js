@@ -58,7 +58,34 @@
             e.preventDefault();
             searchField.focus();
         }
+
+        if (e.key === 'Control') {
+            const body = qs('body');
+            body.classList.add('ctrl-down');
+        }
+
+        if (e.ctrlKey && e.key >= '0' && e.key <= '9') {
+            e.preventDefault();
+            const bookmarks = getMarksyBookmarks();
+            if (Number(e.key) > bookmarks.length || (Number(e.key) === 0) && bookmarks.length < 10) {
+                return;
+            }
+            if (e.key === '0' && bookmarks.length >= 10) {
+                const getBookmark = bookmarks[9]; // tenth item in 0-based array
+                location.href = getBookmark.url;
+                return;
+            }
+            const getBookmark = bookmarks[Number(e.key) - 1];
+            location.href = getBookmark.url;
+        }
     });
+
+    document.addEventListener("keyup", (e) => {
+        if (e.key === 'Control') {
+            const body = qs('body');
+            body.classList.remove('ctrl-down');
+        }
+    })
 
     const hintButton = qs('#hint');
     hintButton.addEventListener('click', () => searchField.focus())
@@ -122,7 +149,6 @@
     const beerOclock = (beerDay) => {
         const dayOfWeek = beerDay || 5;
         const date = new Date(runTimestamp);
-        let msg;
         const diff = date.getDay() - dayOfWeek;
         const beer = qs('#beer');
 
@@ -434,7 +460,7 @@
             bookmarkHTML = `<p>No bookmarks found. <button type="button" class="load-bookmarks">Load defaults</button> </p>`;
         } else {
             getMarksyBookmarks().forEach((item, index) => {
-                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title}</a></p>`
+                bookmarkHTML += `<p><a href="${item.url}">${item.emoji} ${item.title} ${index <= 9 ? `<span class="ctrl-helper">(^ + ${index === 9 ? '0' : index + 1})</span>` : ''}</a></p>`
             });
         }
 
@@ -646,7 +672,7 @@
         calculatedTemperatureValueDiv.innerText = convertedTemperatureValue;
     });
 
-    temperatureInput.addEventListener("keyup", (event) => {
+    temperatureInput.addEventListener("keyup", () => {
         clearTemperatureInputButton.disabled = temperatureInput.value.length <= 0
         calculateTemperatureButton.disabled = temperatureInput.value.length <= 0
     });
@@ -691,7 +717,7 @@
             calculatedSpeedValueDiv.innerText = convertedSpeedValue;
         });
 
-        speedInput.addEventListener("keyup", (event) => {
+        speedInput.addEventListener("keyup", () => {
             clearSpeedInputButton.disabled = speedInput.value.length <= 0
             calculateSpeedButton.disabled = speedInput.value.length <= 0
         });

@@ -643,6 +643,10 @@ fieldset legend {
     }
 }
 
+:root {
+    --wiggle-intensity: 1;
+}
+
 @keyframes wiggle {
     0%   { transform: rotate(calc(-1deg * var(--wiggle-intensity, 1))); }
     25%  { transform: rotate(calc(1.5deg * var(--wiggle-intensity, 1))); }

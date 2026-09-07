@@ -732,4 +732,55 @@
         });
     })();
 
+    (() => {
+        function enterWiggleMode(container) {
+            container.classList.add('edit-mode');
+            container.querySelectorAll('p').forEach((link) => {
+                const duration = 0.12 + Math.random() * 0.25; // 120-370ms
+                const delay = Math.random() * 0.5;             // 0-500ms
+                link.style.animationDuration = `${duration}s`;
+                link.style.animationDelay = `${delay}s`;
+            });
+        }
+
+        function exitWiggleMode(container) {
+            container.classList.remove('edit-mode');
+            container.querySelectorAll('p').forEach((link) => {
+                link.style.animationDuration = '';
+                link.style.animationDelay = '';
+            });
+        }
+
+        const links = qa('.links a');
+        links.forEach((item) => {
+            let timeStart;
+            let timeEnd;
+            let indicator;
+            let indicatorCounter = 0;
+            item.parentElement.style.setProperty('--wiggle-intensity', (0.7 + Math.random() * 0.6).toFixed(2));
+
+            item.addEventListener('mousedown', (e) => {
+                timeStart = Date.now();
+                console.log('holding mouse button', timeStart);
+                indicator = setInterval(() => {
+                    console.log("Holding mouse button...");
+                    indicatorCounter += 1;
+                    if (indicatorCounter >= 3) {
+                        const links = qs('.links');
+                        enterWiggleMode(links);
+                    }
+                }, 500);
+            });
+            item.addEventListener('click', (e) => {
+                timeEnd = Date.now();
+                clearInterval(indicator);
+
+                if (timeEnd - timeStart >= 1500) {
+                    e.preventDefault();
+                    console.log('prevented the click', timeEnd);
+                }
+            });
+        });
+    })();
+
 })(window.JSConfetti, window.moment, window._);

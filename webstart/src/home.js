@@ -138,7 +138,7 @@
     })
 
 
-    const daysRemaining = (eventDate) => moment(eventDate).fromNow();
+    const daysRemaining = (eventDate) => moment(eventDate).diff(moment(), 'days') + ' days';
 
     let beerDate;
 
@@ -187,13 +187,14 @@
         calendarCount.textContent = `${numberOfCalendarEvents} event${numberOfCalendarEvents > 1 ? 's' : ''}`
 
         const sortedArray = calendarEvents.sort((a, b) => new moment(a.date).format('X') - new moment(b.date).format('X'))
-        const list = sortedArray.map((calendarEvent) => {
+        const list = sortedArray.map((calendarEvent, index) => {
             const rightNow = new moment();
             return `<li 
+                data-index="${index}"
                 class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'display-none' : ''}" 
                 title="${moment(calendarEvent.date).format('ddd, Do MMMM YYYY @ h:mm a')}">
-                    <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
-                        ${calendarEvent.title} ${daysRemaining(calendarEvent.date)}
+                    <span class="event-text ${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'strike-through dim' : ''}">
+                        ${calendarEvent.title} ${moment(calendarEvent.date).fromNow()}
                     </span>
                     <span class="${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? 'dim' : ''}">
                         ${moment(calendarEvent.date) < rightNow && calendarEvent.title !== 'Beer o\'clock' ? '✅' : calendarEvent.emoji}
@@ -209,6 +210,28 @@
             ${list}
         </ul></div>
         `;
+
+        beer.addEventListener('click', (e) => {
+            const li = e.target.closest('li');
+            if (!li) return;
+            const index = li.dataset.index;
+            if (index === undefined) return;
+            const calendarEvent = sortedArray[Number(index)];
+            if (!calendarEvent) return;
+
+            calendarEvent.showDaysRemaining = !calendarEvent.showDaysRemaining;
+            const newText = calendarEvent.showDaysRemaining
+                ? `${calendarEvent.title} ${daysRemaining(calendarEvent.date)}`
+                : `${calendarEvent.title} ${moment(calendarEvent.date).fromNow()}`;
+
+            const matchingLis = beer.querySelectorAll(`li[data-index="${index}"]`);
+            matchingLis.forEach((item) => {
+                const textSpan = item.querySelector('.event-text');
+                if (textSpan) {
+                    textSpan.textContent = newText;
+                }
+            });
+        });
 
         beerDate = date
 
@@ -732,55 +755,55 @@
         });
     })();
 
-    (() => {
-        function enterWiggleMode(container) {
-            container.classList.add('edit-mode');
-            container.querySelectorAll('p').forEach((link) => {
-                const duration = 0.12 + Math.random() * 0.25; // 120-370ms
-                const delay = Math.random() * 0.5;             // 0-500ms
-                link.style.animationDuration = `${duration}s`;
-                link.style.animationDelay = `${delay}s`;
-            });
-        }
-
-        function exitWiggleMode(container) {
-            container.classList.remove('edit-mode');
-            container.querySelectorAll('p').forEach((link) => {
-                link.style.animationDuration = '';
-                link.style.animationDelay = '';
-            });
-        }
-
-        const links = qa('.links a');
-        links.forEach((item) => {
-            let timeStart;
-            let timeEnd;
-            let indicator;
-            let indicatorCounter = 0;
-            item.parentElement.style.setProperty('--wiggle-intensity', (0.7 + Math.random() * 0.6).toFixed(2));
-
-            item.addEventListener('mousedown', (e) => {
-                timeStart = Date.now();
-                console.log('holding mouse button', timeStart);
-                indicator = setInterval(() => {
-                    console.log("Holding mouse button...");
-                    indicatorCounter += 1;
-                    if (indicatorCounter >= 3) {
-                        const links = qs('.links');
-                        enterWiggleMode(links);
-                    }
-                }, 500);
-            });
-            item.addEventListener('click', (e) => {
-                timeEnd = Date.now();
-                clearInterval(indicator);
-
-                if (timeEnd - timeStart >= 1500) {
-                    e.preventDefault();
-                    console.log('prevented the click', timeEnd);
-                }
-            });
-        });
-    })();
+    // (() => {
+    //     function enterWiggleMode(container) {
+    //         container.classList.add('edit-mode');
+    //         container.querySelectorAll('p').forEach((link) => {
+    //             const duration = 0.12 + Math.random() * 0.25; // 120-370ms
+    //             const delay = Math.random() * 0.5;             // 0-500ms
+    //             link.style.animationDuration = `${duration}s`;
+    //             link.style.animationDelay = `${delay}s`;
+    //         });
+    //     }
+    //
+    //     function exitWiggleMode(container) {
+    //         container.classList.remove('edit-mode');
+    //         container.querySelectorAll('p').forEach((link) => {
+    //             link.style.animationDuration = '';
+    //             link.style.animationDelay = '';
+    //         });
+    //     }
+    //
+    //     const links = qa('.links a');
+    //     links.forEach((item) => {
+    //         let timeStart;
+    //         let timeEnd;
+    //         let indicator;
+    //         let indicatorCounter = 0;
+    //         item.parentElement.style.setProperty('--wiggle-intensity', (0.7 + Math.random() * 0.6).toFixed(2));
+    //
+    //         item.addEventListener('mousedown', (e) => {
+    //             timeStart = Date.now();
+    //             console.log('holding mouse button', timeStart);
+    //             indicator = setInterval(() => {
+    //                 console.log("Holding mouse button...");
+    //                 indicatorCounter += 1;
+    //                 if (indicatorCounter >= 3) {
+    //                     const links = qs('.links');
+    //                     enterWiggleMode(links);
+    //                 }
+    //             }, 500);
+    //         });
+    //         item.addEventListener('click', (e) => {
+    //             timeEnd = Date.now();
+    //             clearInterval(indicator);
+    //
+    //             if (timeEnd - timeStart >= 1500) {
+    //                 e.preventDefault();
+    //                 console.log('prevented the click', timeEnd);
+    //             }
+    //         });
+    //     });
+    // })();
 
 })(window.JSConfetti, window.moment, window._);

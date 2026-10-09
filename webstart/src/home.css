@@ -311,6 +311,8 @@ input {
     justify-content: center;
     gap: 0.5rem;
     min-width: 400px;
+    cursor: pointer;
+    user-select: none;
 }
 
 .beer li:last-of-type {
